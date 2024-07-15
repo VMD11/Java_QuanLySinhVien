@@ -1,0 +1,6 @@
+Department{id=129343, name=Công nghệ thông tin}
+Department{id=157535, name=Kế toán - Kiểm toán}
+Department{id=182510, name=Quản lý kinh doanh}
+Department{id=165731, name=Điện tử}
+Department{id=129769, name=Cơ khí - Ô tô}
+Department{id=101166, name=Điện}
