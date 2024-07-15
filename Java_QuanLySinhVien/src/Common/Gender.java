@@ -8,6 +8,6 @@ package Common;
  *
  * @author 84362
  */
-public enum GioiTinh {
+public enum Gender {
     Nam,Nu
 }
