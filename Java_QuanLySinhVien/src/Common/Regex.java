@@ -8,6 +8,8 @@ package Common;
  *
  * @author 84362
  */
-public enum Gender {
-    Nam,Nu
+public class Regex {
+    public static String regexGPA(){
+        return "\\d*\\.?\\d*";
+    }
 }
