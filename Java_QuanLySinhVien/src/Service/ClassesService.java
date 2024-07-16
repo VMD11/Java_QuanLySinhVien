@@ -72,7 +72,6 @@ public class ClassesService {
         String parentName = jComboBox.getSelectedItem().toString();
         String parentId = new MajorService().getIDByName(parentName);
         List<String> list = new ArrayList<>();
-//        if(parentName.equalsIgnoreCase("Tất cả "))
         for(Classes item : classList){
             if(item.getMajor_id().equalsIgnoreCase(parentId))
                 list.add(item.getName());
@@ -80,7 +79,7 @@ public class ClassesService {
         return list;
     }
     
-    public void addNew(Classes classes){
+    public void add(Classes classes){
         try {
             if(classList.contains(classes)){
                 JOptionPane.showMessageDialog(null, "lớp "+classes.getName()+" đã tồn tại");
@@ -94,11 +93,43 @@ public class ClassesService {
         }
     }
     
+    public void delete(Classes classes){
+        classList.remove(classes);
+        List<Classes> list = classList;
+        addRangeToFile(filePath, list);
+    }
+    
+    public void update(Classes classes){
+        for(Classes item : classList){
+            if(classes.getId().equalsIgnoreCase(item.getId())){
+                int index = classList.indexOf(item);
+                classList.remove(item);
+                classList.add(index, classes);
+                break;
+            }
+        }
+        List<Classes> list = classList;
+        addRangeToFile(filePath, list);
+    }
+    
     private void addToFile(String filePath, Classes classes) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
         writer.write(classes.toString());
         writer.newLine();
         
+    }
+    
+    private void addRangeToFile(String filePath, List<Classes> list){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            for(Classes item : list){
+                writer.write(item.toString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private List<Classes> getListFromFile(String filePath) throws IOException{

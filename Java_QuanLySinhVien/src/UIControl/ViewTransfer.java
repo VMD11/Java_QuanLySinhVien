@@ -93,8 +93,8 @@ public class ViewTransfer {
         @Override
         public void mousePressed(java.awt.event.MouseEvent e) {
             viewSelected = selected;
-            jPItem.setBackground(new Color(0, 0, 102));
-            jLItem.setBackground(new Color(0, 0, 102));
+            jPItem.setBackground(new Color(0, 0, 175));
+            jLItem.setBackground(new Color(0, 0, 175));
         }
 
         @Override
@@ -103,8 +103,8 @@ public class ViewTransfer {
 
         @Override
         public void mouseEntered(java.awt.event.MouseEvent e) {
-            jPItem.setBackground(new Color(0, 0, 102));
-            jLItem.setBackground(new Color(0, 0, 102));
+            jPItem.setBackground(new Color(0, 0, 175));
+            jLItem.setBackground(new Color(0, 0, 175));
         }
 
         @Override
@@ -120,8 +120,8 @@ public class ViewTransfer {
     private void setChangeBackgroud(String selected){
         for(MenuList item : list){
             if(item.getSelected().equalsIgnoreCase(selected)){
-                item.getjLB().setBackground(new Color(0,0,102));
-                item.getjPL().setBackground(new Color(0,0,102));
+                item.getjLB().setBackground(new Color(0,0,175));
+                item.getjPL().setBackground(new Color(0,0,175));
             }else{
                 item.getjLB().setBackground(new Color(51,102,255));
                 item.getjPL().setBackground(new Color(51,102,255));

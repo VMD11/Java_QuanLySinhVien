@@ -52,7 +52,7 @@ public class DepartmentService {
         return list;
     }
     
-    public void addNewDepartment(Department department){
+    public void add(Department department){
         try {
             if(departmentList.contains(department)){
                 JOptionPane.showMessageDialog(null, "Khoa " + department.getName() + " đã tồn tại");
@@ -80,6 +80,39 @@ public class DepartmentService {
     public int count(){
         return departmentList.size();
     }
+    
+    public void delete(Department department){
+        departmentList.remove(department);
+        List<Department> list = departmentList;
+        addRangeToFile(filePath, list);
+    }
+    
+    public void update(Department department){
+        for(Department item : departmentList){
+            if(department.getId().equalsIgnoreCase(item.getId())){
+                int index = departmentList.indexOf(item);
+                departmentList.remove(item);
+                departmentList.add(index, department);
+                break;
+            }
+        }
+        List<Department> list = departmentList;
+        addRangeToFile(filePath, list);
+    }
+    
+    private void addRangeToFile(String filePath, List<Department> list){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            for(Department item : list){
+                writer.write(item.toString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     private void addToFile(String filePath, Department department) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
         writer.write(department.toString());

@@ -13,9 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,7 +47,7 @@ public class StudentService {
     }
     
     
-    public void addNewStudent(Student student){
+    public void add(Student student){
         try {
             if(studentList.contains(student)){
                 JOptionPane.showMessageDialog(null, "Mã sinh viên đã tồn tại");
@@ -64,16 +61,57 @@ public class StudentService {
         }
     }
     
-    public void deleteStudent(String id){
-        
-    } 
+    public void delete(Student student){
+        studentList.remove(student);
+        List<Student> list = studentList;
+        addRangeToFile(filePath, list);
+    }
     
-    public void saveFile(){
-        try {
-            for(Student student : studentList){
-                addToFile(filePath, student);
+    public void update(Student student){
+        for(Student item : studentList){
+            if(student.getId().equalsIgnoreCase(item.getId())){
+                int index = studentList.indexOf(item);
+                studentList.remove(item);
+                studentList.add(index, student);
+                break;
             }
-        } catch (Exception ex) {
+        }
+        List<Student> list = studentList;
+        addRangeToFile(filePath, list);
+    }
+    
+    public void setDetail(Student student) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("temp.txt"));
+            writer.write(student.toString());
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public Student getDetail(){
+        Student student = null;
+        try{
+            for(Student item : getListFromFile("temp.txt")){
+                student = item;
+            }
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+        return student;
+    }
+    
+    
+    private void addRangeToFile(String filePath, List<Student> list){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            for(Student item : list){
+                writer.write(item.toString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }

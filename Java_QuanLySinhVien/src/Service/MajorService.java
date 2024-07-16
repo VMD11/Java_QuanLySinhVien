@@ -85,7 +85,7 @@ public class MajorService {
         }
     }
     
-    public void addNewDepartment(Major major){
+    public void add(Major major){
         try {
             if(majorList.contains(major)){
                 JOptionPane.showMessageDialog(null, "Ngành " + major.getName() + " đã tồn tại");
@@ -95,6 +95,37 @@ public class MajorService {
                 JOptionPane.showMessageDialog(null, "Thêm mới thành công");
             }
         } catch (HeadlessException | IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void delete(Major major){
+        majorList.remove(major);
+        List<Major> list = majorList;
+        addRangeToFile(filePath, list);
+    }
+    
+    public void update(Major major){
+        for(Major item : majorList){
+            if(major.getId().equalsIgnoreCase(item.getId())){
+                int index = majorList.indexOf(item);
+                majorList.remove(item);
+                majorList.add(index, major);
+                break;
+            }
+        }
+        List<Major> list = majorList;
+        addRangeToFile(filePath, list);
+    }
+    
+    private void addRangeToFile(String filePath, List<Major> list){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            for(Major item : list){
+                writer.write(item.toString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
