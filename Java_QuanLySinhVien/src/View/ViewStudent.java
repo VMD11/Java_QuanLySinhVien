@@ -10,6 +10,8 @@ import Service.StudentService;
 import Component.TableStudent;
 import Service.ClassesService;
 import Service.MajorService;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -26,10 +28,26 @@ public class ViewStudent extends javax.swing.JPanel {
     public ViewStudent() {
         initComponents();
         
-        jCbDepartment.setModel(new ComboBox().loadComboBox(departmentService.getDepartmentNameList()));
-        jCbMajor.setModel(new ComboBox().loadComboBox(majorService.getMajorNameList()));
-        jCbClass.setModel(new ComboBox().loadComboBox(classService.getClassNameList()));
+        jCbDepartment.setModel(new ComboBox().loadComboBox(departmentService.getNameList()));
+        jCbDepartment.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jCbMajor.setModel(new ComboBox().loadComboBox(majorService.getNameList(jCbDepartment)));
+                jCbClass.setModel(new ComboBox().loadComboBox(classService.getNameList(jCbMajor)));
+            }
+            
+        });
+        jCbDepartment.setSelectedIndex(0);
+        jCbMajor.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jCbClass.setModel(new ComboBox().loadComboBox(classService.getNameList(jCbMajor)));
+            }
+            
+        });
+        jCbMajor.setSelectedIndex(0);
         jTStudent.setModel(new TableStudent(studentService));
+        
     }
     
     /**
@@ -58,7 +76,7 @@ public class ViewStudent extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("QUẢN LÝ SINH VIÊN");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -73,9 +91,9 @@ public class ViewStudent extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21))
+                .addGap(10, 10, 10))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
@@ -139,9 +157,10 @@ public class ViewStudent extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
 
+        jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 550));
 
-        jTStudent.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTStudent.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -192,7 +211,7 @@ public class ViewStudent extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

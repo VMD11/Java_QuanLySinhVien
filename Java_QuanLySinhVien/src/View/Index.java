@@ -29,6 +29,9 @@ public class Index extends javax.swing.JFrame {
         List<MenuList> list = new ArrayList<>();
         list.add(new MenuList("Home", jPHome, jLHome));
         list.add(new MenuList("Student", jPStudent, jLStudent));
+        list.add(new MenuList("Department", jPDepartment, jLDepartment));
+        list.add(new MenuList("Major", jPMajor, jLMajor));
+        list.add(new MenuList("Class", jPClass, jLClass));
         viewTransfer.setMouseEvent(list);
     }
 
