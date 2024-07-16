@@ -4,7 +4,10 @@
  */
 package UIControl;
 
+import View.ViewClass;
+import View.ViewDepartment;
 import View.ViewHome;
+import View.ViewMajor;
 import View.ViewStudent;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -66,6 +69,15 @@ public class ViewTransfer {
                     break;
                 case "Student":
                     jP = new ViewStudent();
+                    break;
+                case "Department":
+                    jP = new ViewDepartment();
+                    break;
+                case "Major":
+                    jP = new ViewMajor();
+                    break;
+                case "Class":
+                    jP = new ViewClass();
                     break;
                 default:
                     break;
