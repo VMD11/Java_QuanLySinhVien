@@ -3,19 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/ViewClass.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Model/User.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Component/TableStudent.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/NewStudent.java</file>
+            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/ViewDepartment.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Model/Department.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Service/MajorService.java</file>
+            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Common/CheckEmpty.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/UIControl/MenuList.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Model/Major.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/ViewStudent.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/UIControl/ViewTransfer.java</file>
-            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Common/Gender.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Component/ComboBox.java</file>
+            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Common/Regex.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/ViewHome.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Service/DepartmentService.java</file>
+            <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/ViewMajor.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Service/StudentService.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/View/Index.java</file>
             <file>file:/D:/Learn%20Java/Java_07_2024/Java_QuanLySinhVien/Java_QuanLySinhVien/src/Service/UserService.java</file>
