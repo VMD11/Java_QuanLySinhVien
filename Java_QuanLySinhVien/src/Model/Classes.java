@@ -61,7 +61,7 @@ public class Classes {
     
     @Override
     public String toString() {
-        return "Class{" + "id=" + id + ", name=" + name + ", major=" + major_id + '}';
+        return "Class{" + "id=" + id + ", name=" + name + ", major_id=" + major_id + '}';
     }
 
 }

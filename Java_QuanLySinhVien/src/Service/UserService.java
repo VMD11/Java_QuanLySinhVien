@@ -30,9 +30,9 @@ public class UserService {
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        for(var user : userList){
-            System.out.println(user.toString());
-        }
+//        for(var user : userList){
+//            System.out.println(user.toString());
+//        }
     }
 
     public User getUser() {

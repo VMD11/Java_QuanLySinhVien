@@ -4,8 +4,8 @@
  */
 package Service;
 
-import Model.Classes;
 import Model.Student;
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -17,7 +17,6 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -25,40 +24,42 @@ import javax.swing.event.ListDataListener;
  */
 public class StudentService {
     private final String filePath = "student.txt";
-    private List<Student> studentList;
+    private final List<Student> studentList;
 
     public StudentService() {
-        this.studentList = getStudentListFromFile(filePath);
-        FakeData();
+        this.studentList = getList();
     }
     
     public List<Student> getStudentList() {
         return studentList;
     }
-    private void FakeData(){
-        studentList.add(new Student("2020", "nguyễn văn a", "12/12/12", "Hanoi", 0, "L01",3.1));
-        studentList.add(new Student("2020", "nguyễn văn a", "12/12/12", "Hanoi", 0, "L01",3.1));
-        studentList.add(new Student("2020", "nguyễn văn a", "12/12/12", "Hanoi", 0, "L02",3.1));
-        studentList.add(new Student("2020", "nguyễn văn a", "12/12/12", "Hanoi", 0, "L03",3.1));
-        for(Student student : studentList){
-            System.out.println(student.toString());
+    
+    
+    public List<Student> getList(){
+        List<Student> list = null;
+        try {
+            list = getListFromFile(filePath);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        return list;
     }
     
     public int count(){
         return studentList.size();
     }
     
+    
     public void addNewStudent(Student student){
         try {
             if(studentList.contains(student)){
-                JOptionPane.showMessageDialog(null, "Sinh viên đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Mã sinh viên đã tồn tại");
             }else{
-                addStudentToFile(filePath, student);
+                addToFile(filePath, student);
                 studentList.add(student);
                 JOptionPane.showMessageDialog(null, "Thêm mới thành công");
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException | IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -67,66 +68,72 @@ public class StudentService {
         
     } 
     
-    private void addStudentToFile(String filePath, Student student) throws Exception{
+    public void saveFile(){
+        try {
+            for(Student student : studentList){
+                addToFile(filePath, student);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void addToFile(String filePath, Student student) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
         writer.write(student.toString());
         writer.newLine();
         
     }
     
-    private List<Student> getStudentListFromFile(String filePath){
+    private List<Student> getListFromFile(String filePath) throws IOException{
         List<Student> list = new ArrayList<>();
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line;
-            while((line = reader.readLine()) != null){
-                if(line.startsWith("Student{") && line.endsWith("}")){
-                    line = line.substring(8,line.length()-1);
-                    String[] items = line.split(",");
-                    String id=null;
-                    String fullName=null;
-                    String birthday=null;
-                    String homeland=null;
-                    int gender=0;
-                    String class_id=null;
-                    double GPA=0;
-                    for(String item : items){
-                        String[] parts = item.split("=");
-                        if(parts.length == 2){
-                            switch (parts[0].trim()) {
-                                case "id":
-                                    id = parts[1];
-                                    break;
-                                case "fullName":
-                                    fullName = parts[1];
-                                    break;
-                                case "birthday":
-                                    birthday = parts[1];
-                                    break;
-                                case "homeland":
-                                    homeland = parts[1];
-                                    break;
-                                case "gender":
-                                    gender = Integer.parseInt(parts[1]);
-                                    break;
-                                case "class_id":
-                                    class_id = parts[1];
-                                    break;
-                                case "GPA":
-                                    GPA = Double.parseDouble(parts[1]);
-                                    break;
-                                default:
-                                    break;
-                            }
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while((line = reader.readLine()) != null){
+            if(line.startsWith("Student{") && line.endsWith("}")){
+                line = line.substring(8,line.length()-1);
+                String[] items = line.split(",");
+                String id=null;
+                String fullName=null;
+                String birthday=null;
+                String homeland=null;
+                int gender=0;
+                String class_id=null;
+                double GPA=0;
+                for(String item : items){
+                    String[] parts = item.split("=");
+                    if(parts.length == 2){
+                        switch (parts[0].trim()) {
+                            case "id":
+                                id = parts[1];
+                                break;
+                            case "fullName":
+                                fullName = parts[1];
+                                break;
+                            case "birthday":
+                                birthday = parts[1];
+                                break;
+                            case "homeland":
+                                homeland = parts[1];
+                                break;
+                            case "gender":
+                                gender = Integer.parseInt(parts[1]);
+                                break;
+                            case "class_id":
+                                class_id = parts[1];
+                                break;
+                            case "GPA":
+                                GPA = Double.parseDouble(parts[1]);
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    list.add(new Student(id, fullName, birthday, homeland, gender, class_id, GPA));
                 }
+                list.add(new Student(id, fullName, birthday, homeland, gender, class_id, GPA));
             }
-            reader.close();
-        }catch(IOException | NumberFormatException ex){
-            ex.printStackTrace();
         }
+        reader.close();
         return list;
     }
 }

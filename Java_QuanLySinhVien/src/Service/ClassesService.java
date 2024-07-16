@@ -5,8 +5,16 @@
 package Service;
 
 import Model.Classes;
+import java.awt.HeadlessException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,56 +22,24 @@ import java.util.List;
  */
 public class ClassesService {
     private final String filePath = "class.txt";
-    private List<Classes> classList;
+    private final List<Classes> classList;
 
     public ClassesService() {
-        classList = new ArrayList<>();//getClassListFromFile();
-        FakeData();
+        classList = getList();
     }
 
     public List<Classes> getClassList() {
         return classList;
     }
     
-    private void FakeData(){
-//        Major{id=173126, name=Công nghệ thông tin, department=129343}
-//        Major{id=187337, name=Công nghệ thông tin, department=129343}
-//        Major{id=193939, name=Kế toán, department=157535}
-//        Major{id=185090, name=Quản trị kinh doanh, department=157535}
-//        Major{id=131551, name=Kiểm toán, department=157535}
-//        Major{id=163854, name=Công nghệ ô tô, department=129769}
-//        Major{id=133194, name=Cơ khí, department=129769}
-        classList.add(new Classes("Công nghệ thông tin 1", "173126"));
-        classList.add(new Classes("Công nghệ thông tin 2", "173126"));
-        classList.add(new Classes("Công nghệ thông tin 3", "173126"));
-        classList.add(new Classes("Công nghệ thông tin 4", "173126"));
-                
-        classList.add(new Classes("Kỹ thuật phầm mềm 1", "187337"));
-        classList.add(new Classes("Kỹ thuật phầm mềm 2", "187337"));
-        classList.add(new Classes("Kỹ thuật phầm mềm 3", "187337"));
-                
-        classList.add(new Classes("Kế toán 1", "193939"));
-        classList.add(new Classes("Kế toán 2", "193939"));
-        classList.add(new Classes("Kế toán 3", "193939"));
-        classList.add(new Classes("Kế toán 4", "193939"));
-        classList.add(new Classes("Kế toán 5", "193939"));
-                
-        classList.add(new Classes("Quản trị kinh doanh 1", "185090"));
-        classList.add(new Classes("Quản trị kinh doanh 2", "185090"));
-        classList.add(new Classes("Quản trị kinh doanh 3", "185090"));
-                
-        classList.add(new Classes("Cơ khí 1", "133194"));
-        classList.add(new Classes("Cơ khí 2", "133194"));
-        classList.add(new Classes("Cơ khí 3", "133194"));
-        classList.add(new Classes("Cơ khí 4", "133194"));
-        classList.add(new Classes("Cơ khí 5", "133194"));
-                
-        classList.add(new Classes("Công nghệ ô tô 1", "163854"));
-        classList.add(new Classes("Công nghệ ô tô 2", "163854"));
-        classList.add(new Classes("Công nghệ ô tô 3", "163854"));
-        for(var item : classList){
-            System.out.println(item.toString());
+    public List<Classes> getList(){
+        List<Classes> list = null;
+        try {
+            list = getListFromFile(filePath);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        return list;
     }
     
     public int count(){
@@ -81,21 +57,83 @@ public class ClassesService {
         return name;
     }
     
-    public List<String> getClassNameList(){
-        List<String> list = new ArrayList<>();
+    public String getIDByName(String name){
+        String id = null;
         for(Classes item : classList){
-            list.add(item.getName());
+            if(item.getName().equals(name)){
+                id = item.getId();
+                break;
+            }
+        }
+        return id;
+    }
+    
+    public List<String> getNameList(JComboBox jComboBox){
+        String parentName = jComboBox.getSelectedItem().toString();
+        String parentId = new MajorService().getIDByName(parentName);
+        List<String> list = new ArrayList<>();
+//        if(parentName.equalsIgnoreCase("Tất cả "))
+        for(Classes item : classList){
+            if(item.getMajor_id().equalsIgnoreCase(parentId))
+                list.add(item.getName());
         }
         return list;
     }
     
-    private List<Classes> getClassListFromFile(){
-        List<Classes> list = null;
+    public void addNew(Classes classes){
         try {
-            
-        } catch (Exception ex) {
+            if(classList.contains(classes)){
+                JOptionPane.showMessageDialog(null, "lớp "+classes.getName()+" đã tồn tại");
+            }else{
+                addToFile(filePath, classes);
+                classList.add(classes);
+                JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+            }
+        } catch (HeadlessException | IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    private void addToFile(String filePath, Classes classes) throws IOException{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+        writer.write(classes.toString());
+        writer.newLine();
+        
+    }
+    
+    private List<Classes> getListFromFile(String filePath) throws IOException{
+        List<Classes> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while((line = reader.readLine()) != null){
+            if(line.startsWith("Class{") && line.endsWith("}")){
+                line = line.substring(6,line.length()-1);
+                String[] items = line.split(",");
+                String id=null;
+                String name=null;
+                String major_id=null;
+                for(String item : items){
+                    String[] parts = item.split("=");
+                    if(parts.length == 2){
+                        switch (parts[0].trim()) {
+                            case "id":
+                                id = parts[1];
+                                break;
+                            case "name":
+                                name = parts[1];
+                                break;
+                            case "major_id":
+                                major_id = parts[1];
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                list.add(new Classes(id, name, major_id));
+            }
+        }
+        reader.close();
         return list;
     }
 }

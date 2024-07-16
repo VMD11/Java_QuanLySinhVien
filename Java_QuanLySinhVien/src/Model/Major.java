@@ -54,7 +54,7 @@ public class Major {
 
     @Override
     public String toString() {
-        return "Major{" + "id=" + id + ", name=" + name + ", department=" + department_id + '}';
+        return "Major{" + "id=" + id + ", name=" + name + ", department_id=" + department_id + '}';
     }
 
     

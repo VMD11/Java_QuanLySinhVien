@@ -5,9 +5,16 @@
 package Service;
 
 import Model.Department;
+import java.awt.HeadlessException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,39 +22,99 @@ import java.util.List;
  */
 public class DepartmentService {
     private final String filePath = "department.txt";
-    private List<Department> departmentList;
+    private final List<Department> departmentList;
 
     public DepartmentService() {
-        departmentList = new ArrayList<>();
-        FakeData();
+        departmentList = getList();
     }
 
     public List<Department> getDepartmentList() {
         return departmentList;
     }
     
-    public List<String> getDepartmentNameList() {
+    public List<Department> getList(){
+       List<Department> list = null;
+       try {
+           list = getListFromFile(filePath);
+       } catch (IOException ex) {
+           ex.printStackTrace();
+       }
+       return list;
+   }
+    
+    public List<String> getNameList() {
         List<String> list = new ArrayList<>();
         Collections.sort(departmentList);
         for(Department item : departmentList){
             list.add(item.name);
         }
+        list.add(0, "Tất cả Khoa");
         return list;
     }
     
-    private void FakeData(){
-        departmentList.add(new Department("Công nghệ thông tin"));
-        departmentList.add(new Department("Kế toán - Kiểm toán"));
-        departmentList.add(new Department("Quản lý kinh doanh"));
-        departmentList.add(new Department("Điện tử"));
-        departmentList.add(new Department("Cơ khí - Ô tô"));
-        departmentList.add(new Department("Điện"));
-        for(Department item : departmentList){
-            System.out.println(item.toString());
+    public void addNewDepartment(Department department){
+        try {
+            if(departmentList.contains(department)){
+                JOptionPane.showMessageDialog(null, "Khoa " + department.getName() + " đã tồn tại");
+            }else{
+                addToFile(filePath, department);
+                departmentList.add(department);
+                JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+            }
+        } catch (HeadlessException | IOException ex) {
+            ex.printStackTrace();
         }
+    }
+    
+    public String getIDByName(String name){
+        String id = null;
+        for(Department item : departmentList){
+            if(item.getName().equals(name)){
+                id = item.getId();
+                break;
+            }
+        }
+        return id;
     }
     
     public int count(){
         return departmentList.size();
+    }
+    private void addToFile(String filePath, Department department) throws IOException{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+        writer.write(department.toString());
+        writer.newLine();
+        
+    }
+    private List<Department> getListFromFile(String filePath) throws IOException{
+        List<Department> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while((line = reader.readLine()) != null){
+            if(line.startsWith("Department{") && line.endsWith("}")){
+                line = line.substring(11,line.length()-1);
+                String[] items = line.split(",");
+                String id=null;
+                String name=null;
+                for(String item : items){
+                    String[] parts = item.split("=");
+                    if(parts.length == 2){
+                        switch (parts[0].trim()) {
+                            case "id":
+                                id = parts[1];
+                                break;
+                            case "name":
+                                name = parts[1];
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                list.add(new Department(id, name));
+            }
+        }
+        reader.close();
+        return list;
     }
 }

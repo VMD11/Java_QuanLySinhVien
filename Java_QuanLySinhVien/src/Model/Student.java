@@ -82,9 +82,7 @@ public class Student {
     }
     
     public String getClassName(){
-//        String name = new ClassesService().getNameByID(id);
-//        return name==null? "Trống" : name;
-        return new ClassesService().getNameByID(id);
+        return new ClassesService().getNameByID(class_id);
     }
 
     public double getGPA() {
