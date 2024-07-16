@@ -134,7 +134,7 @@
             <Container class="javax.swing.JPanel" name="jPHome">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="0" red="0" type="rgb"/>
+                  <Color blue="af" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -148,8 +148,8 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
-                          <Component id="jLHome" min="-2" pref="250" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jLHome" min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -163,7 +163,7 @@
                 <Component class="javax.swing.JLabel" name="jLHome">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="0" red="0" type="rgb"/>
+                      <Color blue="af" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -180,9 +180,6 @@
                       <Dimension value="[250, 52]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLHomeMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -200,7 +197,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
                           <Component id="jLStudent" min="-2" pref="245" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -222,7 +219,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Images/student.png"/>
+                      <Image iconType="3" name="/Images/people_mini.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch Sinh vi&#xea;n"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -232,9 +229,6 @@
                       <Dimension value="[245, 52]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLStudentMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -286,9 +280,6 @@
                       <Dimension value="[86, 25]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLLogoutMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -371,7 +362,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Images/student.png"/>
+                      <Image iconType="3" name="/Images/school_mini.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch Khoa"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -381,9 +372,6 @@
                       <Dimension value="[245, 52]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDepartmentMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -423,7 +411,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Images/student.png"/>
+                      <Image iconType="3" name="/Images/major_mini.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch Ng&#xe0;nh"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -433,9 +421,6 @@
                       <Dimension value="[245, 52]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLMajorMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -475,7 +460,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Images/student.png"/>
+                      <Image iconType="3" name="/Images/room_mini.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch L&#x1edb;p"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -485,9 +470,6 @@
                       <Dimension value="[245, 52]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLClassMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

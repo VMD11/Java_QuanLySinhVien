@@ -4,6 +4,10 @@
  */
 package View;
 import Service.UserService;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 /**
  *
@@ -16,6 +20,33 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        
+        btnLogin.addMouseListener(new MouseListener() {
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                btnLogin.setBackground(new Color(0,0,225));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnLogin.setBackground(new Color(0,0,225));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnLogin.setBackground(new Color(51, 102, 255));
+            }
+        
+        });
     }
 
     /**
@@ -112,11 +143,11 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(40, 40, 40)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );

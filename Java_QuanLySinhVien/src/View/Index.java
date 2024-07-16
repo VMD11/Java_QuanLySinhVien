@@ -7,6 +7,8 @@ package View;
 import UIControl.MenuList;
 import UIControl.ViewTransfer;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,6 +26,11 @@ public class Index extends javax.swing.JFrame {
         initComponents();
         
         setTitle("Quản lý sinh viên");
+        acionTransfer();
+        actionMouseLogout();
+    }
+    
+    private void acionTransfer(){
         ViewTransfer viewTransfer = new ViewTransfer(jPView);
         viewTransfer.setViewDefault(jPView, jLHome);
         List<MenuList> list = new ArrayList<>();
@@ -34,7 +41,41 @@ public class Index extends javax.swing.JFrame {
         list.add(new MenuList("Class", jPClass, jLClass));
         viewTransfer.setMouseEvent(list);
     }
+    
+    private void actionMouseLogout(){
+        jPLogout.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đăng xuất", "Đăng xuất", JOptionPane.YES_NO_OPTION);
+                if(result == JOptionPane.YES_OPTION){
+                    jPRoot.setVisible(false);
+                    new Login().setVisible(true);
+                }
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                jLLogout.setBackground(new Color(200, 0, 0));
+                jPLogout.setBackground(new Color(200, 0, 0));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jLLogout.setBackground(new Color(200, 0, 0));
+                jPLogout.setBackground(new Color(200, 0, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jLLogout.setBackground(new Color(255, 51, 51));
+                jPLogout.setBackground(new Color(255, 51, 51));
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,30 +115,25 @@ public class Index extends javax.swing.JFrame {
         jPMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
         jPMenu.setPreferredSize(new java.awt.Dimension(300, 760));
 
-        jPHome.setBackground(new java.awt.Color(0, 0, 102));
+        jPHome.setBackground(new java.awt.Color(0, 0, 175));
         jPHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPHome.setPreferredSize(new java.awt.Dimension(275, 52));
 
-        jLHome.setBackground(new java.awt.Color(0, 0, 102));
+        jLHome.setBackground(new java.awt.Color(0, 0, 175));
         jLHome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLHome.setForeground(new java.awt.Color(255, 255, 255));
         jLHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/home.png"))); // NOI18N
         jLHome.setText("Trang chủ");
         jLHome.setPreferredSize(new java.awt.Dimension(250, 52));
-        jLHome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLHomeMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPHomeLayout = new javax.swing.GroupLayout(jPHome);
         jPHome.setLayout(jPHomeLayout);
         jPHomeLayout.setHorizontalGroup(
             jPHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPHomeLayout.createSequentialGroup()
-                .addGap(0, 25, Short.MAX_VALUE)
-                .addComponent(jLHome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLHome, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPHomeLayout.setVerticalGroup(
             jPHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,22 +146,17 @@ public class Index extends javax.swing.JFrame {
         jLStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLStudent.setForeground(new java.awt.Color(255, 255, 255));
         jLStudent.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/student.png"))); // NOI18N
+        jLStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/people_mini.png"))); // NOI18N
         jLStudent.setText("Danh sách Sinh viên");
         jLStudent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLStudent.setPreferredSize(new java.awt.Dimension(245, 52));
-        jLStudent.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLStudentMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPStudentLayout = new javax.swing.GroupLayout(jPStudent);
         jPStudent.setLayout(jPStudentLayout);
         jPStudentLayout.setHorizontalGroup(
             jPStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPStudentLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 30, Short.MAX_VALUE)
                 .addComponent(jLStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPStudentLayout.setVerticalGroup(
@@ -142,11 +173,6 @@ public class Index extends javax.swing.JFrame {
         jLLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLLogout.setText("Đăng xuất");
         jLLogout.setPreferredSize(new java.awt.Dimension(86, 25));
-        jLLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLLogoutMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPLogoutLayout = new javax.swing.GroupLayout(jPLogout);
         jPLogout.setLayout(jPLogoutLayout);
@@ -193,15 +219,10 @@ public class Index extends javax.swing.JFrame {
         jLDepartment.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLDepartment.setForeground(new java.awt.Color(255, 255, 255));
         jLDepartment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLDepartment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/student.png"))); // NOI18N
+        jLDepartment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/school_mini.png"))); // NOI18N
         jLDepartment.setText("Danh sách Khoa");
         jLDepartment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLDepartment.setPreferredSize(new java.awt.Dimension(245, 52));
-        jLDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLDepartmentMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPDepartmentLayout = new javax.swing.GroupLayout(jPDepartment);
         jPDepartment.setLayout(jPDepartmentLayout);
@@ -222,15 +243,10 @@ public class Index extends javax.swing.JFrame {
         jLMajor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLMajor.setForeground(new java.awt.Color(255, 255, 255));
         jLMajor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLMajor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/student.png"))); // NOI18N
+        jLMajor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/major_mini.png"))); // NOI18N
         jLMajor.setText("Danh sách Ngành");
         jLMajor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLMajor.setPreferredSize(new java.awt.Dimension(245, 52));
-        jLMajor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLMajorMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPMajorLayout = new javax.swing.GroupLayout(jPMajor);
         jPMajor.setLayout(jPMajorLayout);
@@ -251,15 +267,10 @@ public class Index extends javax.swing.JFrame {
         jLClass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLClass.setForeground(new java.awt.Color(255, 255, 255));
         jLClass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/student.png"))); // NOI18N
+        jLClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/room_mini.png"))); // NOI18N
         jLClass.setText("Danh sách Lớp");
         jLClass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLClass.setPreferredSize(new java.awt.Dimension(245, 52));
-        jLClass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLClassMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPClassLayout = new javax.swing.GroupLayout(jPClass);
         jPClass.setLayout(jPClassLayout);
@@ -356,35 +367,6 @@ public class Index extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLHomeMouseClicked
-        
-    }//GEN-LAST:event_jLHomeMouseClicked
-
-    private void jLStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLStudentMouseClicked
-        
-    }//GEN-LAST:event_jLStudentMouseClicked
-
-    private void jLLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLLogoutMouseClicked
-        int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đăng xuất", "Đăng xuất", JOptionPane.YES_NO_OPTION);
-        if(result == JOptionPane.YES_OPTION){
-            this.setVisible(false);
-            new Login().setVisible(true);
-        }
-        
-    }//GEN-LAST:event_jLLogoutMouseClicked
-
-    private void jLDepartmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDepartmentMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLDepartmentMouseClicked
-
-    private void jLMajorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLMajorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLMajorMouseClicked
-
-    private void jLClassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLClassMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLClassMouseClicked
 
     
     
