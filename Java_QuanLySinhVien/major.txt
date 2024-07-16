@@ -1,7 +1,7 @@
-Major{id=173126, name=Công nghệ thông tin, department=129343}
-Major{id=187337, name=Công nghệ thông tin, department=129343}
-Major{id=193939, name=Kế toán, department=157535}
-Major{id=185090, name=Quản trị kinh doanh, department=157535}
-Major{id=131551, name=Kiểm toán, department=157535}
-Major{id=163854, name=Công nghệ ô tô, department=129769}
-Major{id=133194, name=Cơ khí, department=129769}
+Major{id=173126, name=Công nghệ thông tin, department_id=129343}
+Major{id=187337, name=Công nghệ thông tin, department_id=129343}
+Major{id=193939, name=Kế toán, department_id=157535}
+Major{id=185090, name=Quản trị kinh doanh, department_id=157535}
+Major{id=131551, name=Kiểm toán, department_id=157535}
+Major{id=163854, name=Công nghệ ô tô, department_id=129769}
+Major{id=133194, name=Cơ khí, department_id=129769}

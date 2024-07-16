@@ -1,23 +1,23 @@
-Class{id=146112, name=Công nghệ thông tin 1, major=173126}
-Class{id=147776, name=Công nghệ thông tin 2, major=173126}
-Class{id=157883, name=Công nghệ thông tin 3, major=173126}
-Class{id=196143, name=Công nghệ thông tin 4, major=173126}
-Class{id=149242, name=Kỹ thuật phầm mềm 1, major=187337}
-Class{id=110348, name=Kỹ thuật phầm mềm 2, major=187337}
-Class{id=164526, name=Kỹ thuật phầm mềm 3, major=187337}
-Class{id=155082, name=Kế toán 1, major=193939}
-Class{id=103466, name=Kế toán 2, major=193939}
-Class{id=129183, name=Kế toán 3, major=193939}
-Class{id=193134, name=Kế toán 4, major=193939}
-Class{id=127867, name=Kế toán 5, major=193939}
-Class{id=142183, name=Quản trị kinh doanh 1, major=185090}
-Class{id=193917, name=Quản trị kinh doanh 2, major=185090}
-Class{id=104137, name=Quản trị kinh doanh 3, major=185090}
-Class{id=161812, name=Cơ khí 1, major=133194}
-Class{id=190649, name=Cơ khí 2, major=133194}
-Class{id=105731, name=Cơ khí 3, major=133194}
-Class{id=131942, name=Cơ khí 4, major=133194}
-Class{id=160093, name=Cơ khí 5, major=133194}
-Class{id=121231, name=Công nghệ ô tô 1, major=163854}
-Class{id=156677, name=Công nghệ ô tô 2, major=163854}
-Class{id=176569, name=Công nghệ ô tô 3, major=163854}
+Class{id=146112, name=Công nghệ thông tin 1, major_id=173126}
+Class{id=147776, name=Công nghệ thông tin 2, major_id=173126}
+Class{id=157883, name=Công nghệ thông tin 3, major_id=173126}
+Class{id=196143, name=Công nghệ thông tin 4, major_id=173126}
+Class{id=149242, name=Kỹ thuật phầm mềm 1, major_id=187337}
+Class{id=110348, name=Kỹ thuật phầm mềm 2, major_id=187337}
+Class{id=164526, name=Kỹ thuật phầm mềm 3, major_id=187337}
+Class{id=155082, name=Kế toán 1, major_id=193939}
+Class{id=103466, name=Kế toán 2, major_id=193939}
+Class{id=129183, name=Kế toán 3, major_id=193939}
+Class{id=193134, name=Kế toán 4, major_id=193939}
+Class{id=127867, name=Kế toán 5, major_id=193939}
+Class{id=142183, name=Quản trị kinh doanh 1, major_id=185090}
+Class{id=193917, name=Quản trị kinh doanh 2, major_id=185090}
+Class{id=104137, name=Quản trị kinh doanh 3, major_id=185090}
+Class{id=161812, name=Cơ khí 1, major_id=133194}
+Class{id=190649, name=Cơ khí 2, major_id=133194}
+Class{id=105731, name=Cơ khí 3, major_id=133194}
+Class{id=131942, name=Cơ khí 4, major_id=133194}
+Class{id=160093, name=Cơ khí 5, major_id=133194}
+Class{id=121231, name=Công nghệ ô tô 1, major_id=163854}
+Class{id=156677, name=Công nghệ ô tô 2, major_id=163854}
+Class{id=176569, name=Công nghệ ô tô 3, major_id=163854}
