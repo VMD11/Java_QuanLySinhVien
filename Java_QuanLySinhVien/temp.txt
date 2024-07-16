@@ -1,0 +1,1 @@
+Student{id=2022, fullName=nguyễn văn b, birthday=21/1/2000, homeland=Hà Nội, gender=0, class_id=190649, GPA=2.6}

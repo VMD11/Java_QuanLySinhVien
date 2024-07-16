@@ -8,10 +8,14 @@ import Component.ComboBox;
 import Service.DepartmentService;
 import Service.StudentService;
 import Component.TableStudent;
+import Model.Student;
 import Service.ClassesService;
 import Service.MajorService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -28,6 +32,12 @@ public class ViewStudent extends javax.swing.JPanel {
     public ViewStudent() {
         initComponents();
         
+        loadCB();
+        loadTable();
+        
+    }
+    
+    private void loadCB(){
         jCbDepartment.setModel(new ComboBox().loadComboBox(departmentService.getNameList()));
         jCbDepartment.addActionListener(new ActionListener(){
             @Override
@@ -46,8 +56,52 @@ public class ViewStudent extends javax.swing.JPanel {
             
         });
         jCbMajor.setSelectedIndex(0);
+    }
+    
+    private void loadTable(){
         jTStudent.setModel(new TableStudent(studentService));
-        
+        jTStudent.addMouseListener(new MouseListener() {
+            
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1){
+                    int selectedRow = jTStudent.getSelectedRow();
+                    if (selectedRow != -1) {
+                        String id = jTStudent.getValueAt(selectedRow, 0).toString();
+                        String name = jTStudent.getValueAt(selectedRow, 1).toString();
+                        String birthday = jTStudent.getValueAt(selectedRow, 3).toString();
+                        String homeland = jTStudent.getValueAt(selectedRow, 6).toString();
+                        int gender = 0;
+                        if(jTStudent.getValueAt(selectedRow, 2).toString().equalsIgnoreCase("Nữ"))
+                            gender = 1;
+                        String className = jTStudent.getValueAt(selectedRow, 5).toString();
+                        double GPA = Double.parseDouble(jTStudent.getValueAt(selectedRow, 4).toString());
+                        String class_id = classService.getIDByName(className);
+                        Student student = new Student(id, name, birthday, homeland, gender, class_id, GPA);
+                        studentService.setDetail(student);
+                        new DetailStudent().setVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
     }
     
     /**
