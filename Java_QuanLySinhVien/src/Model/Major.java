@@ -4,6 +4,8 @@
  */
 package Model;
 
+import Service.DepartmentService;
+
 /**
  *
  * @author 84362
@@ -50,6 +52,10 @@ public class Major {
 
     public void setDepartment_id(String department_id) {
         this.department_id = department_id;
+    }
+    
+    public String getDepartment_name(){
+        return new DepartmentService().getNameByID(department_id);
     }
 
     @Override

@@ -77,6 +77,17 @@ public class DepartmentService {
         return id;
     }
     
+    public String getNameByID(String id){
+        String name = null;
+        for(Department item : departmentList){
+            if(item.getId().equalsIgnoreCase(id)){
+                name = item.getName();
+                break;
+            }
+        }
+        return name;
+    }
+    
     public int count(){
         return departmentList.size();
     }

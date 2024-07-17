@@ -55,7 +55,7 @@ public class Classes {
     }
     
     public String getMajorName(){
-        return new MajorService().getNameByID(id);
+        return new MajorService().getNameByID(major_id);
         
     }
     
