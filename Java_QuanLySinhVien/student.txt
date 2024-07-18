@@ -1,3 +1,14 @@
 Student{id=2021, fullName=nguyễn văn a, birthday=21/1/2000, homeland=Hà Nội, gender=0, class_id=110348, GPA=2.6}
 Student{id=2022, fullName=nguyễn văn b, birthday=21/1/2000, homeland=Hà Nội, gender=0, class_id=190649, GPA=2.6}
 Student{id=2023, fullName=nguyễn văn c, birthday=21/1/2000, homeland=Hà Nội, gender=0, class_id=193134, GPA=2.6}
+Student{id=1, fullName=1, birthday=1, homeland=1, gender=1, class_id=146112, GPA=1.0}
+Student{id=2, fullName=1, birthday=1, homeland=1, gender=1, class_id=146112, GPA=1.0}
+Student{id=3, fullName=3, birthday=3, homeland=3, gender=1, class_id=146112, GPA=3.0}
+Student{id=4, fullName=4, birthday=4, homeland=4, gender=1, class_id=146112, GPA=4.0}
+Student{id=q, fullName=q, birthday=q, homeland=q, gender=1, class_id=193917, GPA=3.0}
+Student{id=w, fullName=ư, birthday=ư, homeland=ư, gender=1, class_id=146112, GPA=2.0}
+Student{id=x, fullName=x, birthday=x, homeland=x, gender=1, class_id=146112, GPA=2.0}
+Student{id=d, fullName=d, birthday=d, homeland=d, gender=1, class_id=146112, GPA=4.0}
+Student{id=e, fullName=e, birthday=e, homeland=e, gender=0, class_id=146112, GPA=3.0}
+Student{id=a, fullName=a, birthday=a, homeland=a, gender=0, class_id=146112, GPA=2.0}
+Student{id=z, fullName=z, birthday=z, homeland=z, gender=0, class_id=146112, GPA=2.0}

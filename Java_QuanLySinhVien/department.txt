@@ -1,5 +1,6 @@
 Department{id=129343, name=Công nghệ thông tin}
 Department{id=157535, name=Kinh tế}
-Department{id=165731, name=Điện tử}
+Department{id=165731, name=Điện - Điện tử}
 Department{id=129769, name=Cơ khí - Ô tô}
-Department{id=101166, name=Điện}
+Department{id=183187, name=test}
+Department{id=173251, name=test test}

@@ -1,7 +1,13 @@
 Major{id=173126, name=Công nghệ thông tin, department_id=129343}
-Major{id=187337, name=Công nghệ thông tin, department_id=129343}
+Major{id=187337, name=Kĩ thuật phần mềm, department_id=129343}
 Major{id=193939, name=Kế toán, department_id=157535}
 Major{id=185090, name=Quản trị kinh doanh, department_id=157535}
 Major{id=131551, name=Kiểm toán, department_id=157535}
 Major{id=163854, name=Công nghệ ô tô, department_id=129769}
 Major{id=133194, name=Cơ khí, department_id=129769}
+Major{id=117595, name=test, department_id=173251}
+Major{id=198998, name=test 2, department_id=183187}
+Major{id=171187, name=test 3, department_id=165731}
+Major{id=122942, name=Công nghệ kỹ thuật điện tử - viễn thông, department_id=165731}
+
+Major{id=166252, name=Khoa học máy tính, department_id=129343}
