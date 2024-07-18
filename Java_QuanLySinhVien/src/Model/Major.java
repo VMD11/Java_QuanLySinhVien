@@ -5,12 +5,13 @@
 package Model;
 
 import Service.DepartmentService;
+import java.util.Objects;
 
 /**
  *
  * @author 84362
  */
-public class Major {
+public class Major implements Comparable<Major>{
     public String id;
     public String name;
     public String department_id;
@@ -61,6 +62,33 @@ public class Major {
     @Override
     public String toString() {
         return "Major{" + "id=" + id + ", name=" + name + ", department_id=" + department_id + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Major other = (Major) obj;
+        return Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int compareTo(Major o) {
+        return this.name.compareTo(o.getName());
     }
 
     

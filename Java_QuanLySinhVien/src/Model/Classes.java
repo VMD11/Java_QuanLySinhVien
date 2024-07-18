@@ -5,12 +5,13 @@
 package Model;
 
 import Service.MajorService;
+import java.util.Objects;
 
 /**
  *
  * @author 84362
  */
-public class Classes {
+public class Classes implements Comparable<Classes>{
     private  String id;
     private String name;
     private String major_id;
@@ -62,6 +63,33 @@ public class Classes {
     @Override
     public String toString() {
         return "Class{" + "id=" + id + ", name=" + name + ", major_id=" + major_id + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Classes other = (Classes) obj;
+        return Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int compareTo(Classes o) {
+        return this.name.compareTo(o.getName());
     }
 
 }

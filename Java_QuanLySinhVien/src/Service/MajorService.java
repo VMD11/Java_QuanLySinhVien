@@ -49,7 +49,7 @@ public class MajorService {
     public String getNameByID(String id){
         String name = null;
         for(Major item : majorList){
-            if(item.getId().equals(id)){
+            if(item.getId().equalsIgnoreCase(id)){
                 name = item.getName();
                 break;
             }
@@ -60,12 +60,23 @@ public class MajorService {
     public String getIDByName(String name){
         String id = null;
         for(Major item : majorList){
-            if(item.getName().equals(name)){
+            if(item.getName().equalsIgnoreCase(name)){
                 id = item.getId();
                 break;
             }
         }
         return id;
+    }
+    
+    public String getDepartmentIDByID(String id){
+        String department_id = null;
+        for(Major item : majorList){
+            if(item.getId().equalsIgnoreCase(id)){
+                department_id = item.getDepartment_id();
+                break;
+            }
+        }
+        return department_id;
     }
     
     public List<String> getNameList(JComboBox jComboBox){
@@ -99,22 +110,36 @@ public class MajorService {
         }
     }
     public void delete(Major major){
+        new ClassesService().deleteByMajor_id(major.getId());
         majorList.remove(major);
         List<Major> list = majorList;
         addRangeToFile(filePath, list);
+        JOptionPane.showMessageDialog(null, "Xóa thành công");
+    }
+    
+    public void deleteByDepartment_id(String department_id){
+        for(Major item : majorList){
+            if(item.getDepartment_id().equalsIgnoreCase(department_id)){
+                majorList.remove(item);
+                new ClassesService().deleteByMajor_id(item.getId());
+            }
+        }
+        addRangeToFile(filePath, majorList);
     }
     
     public void update(Major major){
-        for(Major item : majorList){
-            if(major.getId().equalsIgnoreCase(item.getId())){
-                int index = majorList.indexOf(item);
-                majorList.remove(item);
-                majorList.add(index, major);
-                break;
+        
+            for(Major item : majorList){
+                if(major.getId().equalsIgnoreCase(item.getId())){
+                    int index = majorList.indexOf(item);
+                    majorList.remove(item);
+                    majorList.add(index, major);
+                    break;
+                }
             }
-        }
-        List<Major> list = majorList;
-        addRangeToFile(filePath, list);
+            JOptionPane.showMessageDialog(null, "Sủa thành công");
+            List<Major> list = majorList;
+            addRangeToFile(filePath, list);
     }
     
     private void addRangeToFile(String filePath, List<Major> list){
@@ -132,8 +157,9 @@ public class MajorService {
     
     private void addToFile(String filePath, Major major) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
-        writer.write(major.toString());
         writer.newLine();
+        writer.write(major.toString());
+        writer.close();
     }
     
     private List<Major> getListFromFile(String filePath) throws IOException{

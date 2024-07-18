@@ -69,7 +69,7 @@ public class DepartmentService {
     public String getIDByName(String name){
         String id = null;
         for(Department item : departmentList){
-            if(item.getName().equals(name)){
+            if(item.getName().equalsIgnoreCase(name)){
                 id = item.getId();
                 break;
             }
@@ -93,9 +93,11 @@ public class DepartmentService {
     }
     
     public void delete(Department department){
+        new MajorService().deleteByDepartment_id(department.getId());
         departmentList.remove(department);
         List<Department> list = departmentList;
         addRangeToFile(filePath, list);
+        JOptionPane.showMessageDialog(null, "Xóa thành công");
     }
     
     public void update(Department department){
@@ -109,6 +111,7 @@ public class DepartmentService {
         }
         List<Department> list = departmentList;
         addRangeToFile(filePath, list);
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
     }
     
     private void addRangeToFile(String filePath, List<Department> list){
@@ -126,8 +129,9 @@ public class DepartmentService {
     
     private void addToFile(String filePath, Department department) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
-        writer.write(department.toString());
         writer.newLine();
+        writer.write(department.toString());
+        writer.close();
         
     }
     private List<Department> getListFromFile(String filePath) throws IOException{

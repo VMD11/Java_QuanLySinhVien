@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ public class ClassesService {
     }
 
     public List<Classes> getClassList() {
+        Collections.sort(classList);
         return classList;
     }
     
@@ -49,7 +51,7 @@ public class ClassesService {
     public String getNameByID(String id){
         String name = null;
         for(Classes item : classList){
-            if(item.getId().equals(id)){
+            if(item.getId().equalsIgnoreCase(id)){
                 name = item.getName();
                 break;
             }
@@ -60,12 +62,23 @@ public class ClassesService {
     public String getIDByName(String name){
         String id = null;
         for(Classes item : classList){
-            if(item.getName().equals(name)){
+            if(item.getName().equalsIgnoreCase(name)){
                 id = item.getId();
                 break;
             }
         }
         return id;
+    }
+    
+    public String getMajor_idByID(String id){
+        String major_id = null;
+        for(Classes item : classList){
+            if(item.getId().equalsIgnoreCase(id)){
+                major_id = item.getMajor_id();
+                break;
+            }
+        }
+        return major_id;
     }
     
     public List<String> getNameList(JComboBox jComboBox){
@@ -82,7 +95,7 @@ public class ClassesService {
     public void add(Classes classes){
         try {
             if(classList.contains(classes)){
-                JOptionPane.showMessageDialog(null, "lớp "+classes.getName()+" đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Lớp "+classes.getName()+" đã tồn tại");
             }else{
                 addToFile(filePath, classes);
                 classList.add(classes);
@@ -94,28 +107,44 @@ public class ClassesService {
     }
     
     public void delete(Classes classes){
+        new StudentService().deleteByClass_id(classes.getId());
         classList.remove(classes);
         List<Classes> list = classList;
         addRangeToFile(filePath, list);
+        JOptionPane.showMessageDialog(null, "Xóa thành công");
     }
     
-    public void update(Classes classes){
+    public void deleteByMajor_id(String major_id){
         for(Classes item : classList){
-            if(classes.getId().equalsIgnoreCase(item.getId())){
+            if(item.getMajor_id().equalsIgnoreCase(major_id)){
+                classList.remove(item);
+                new StudentService().deleteByClass_id(item.getId());
+            }
+        }
+        addRangeToFile(filePath, classList);
+    }
+    
+    public void update(Classes classes) {
+
+        for (Classes item : classList) {
+            if (classes.getId().equalsIgnoreCase(item.getId())) {
                 int index = classList.indexOf(item);
                 classList.remove(item);
                 classList.add(index, classes);
                 break;
             }
         }
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
         List<Classes> list = classList;
         addRangeToFile(filePath, list);
+
     }
     
     private void addToFile(String filePath, Classes classes) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
-        writer.write(classes.toString());
         writer.newLine();
+        writer.write(classes.toString());
+        writer.close();
         
     }
     

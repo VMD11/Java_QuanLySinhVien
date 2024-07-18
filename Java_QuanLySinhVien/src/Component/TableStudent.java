@@ -6,6 +6,7 @@ package Component;
 
 import Model.Student;
 import Service.StudentService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,9 +17,9 @@ import javax.swing.table.AbstractTableModel;
 public class TableStudent extends AbstractTableModel{
         private String[] title = {"Mã sinh viên","Họ tên","Giới tính","Ngày sinh","GPA","Lớp","Quê quán"};
         private Class[] classes = {String.class,String.class,String.class,String.class,String.class,String.class,String.class};
-        private List<Student> studentList;
+        private List<Student> studentList = new ArrayList<>();
         public TableStudent(StudentService studentService) {
-           studentList = studentService.getStudentList();
+            studentList = studentService.getStudentList();
         }
         
         @Override

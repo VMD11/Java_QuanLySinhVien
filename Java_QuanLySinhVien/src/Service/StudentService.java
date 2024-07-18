@@ -47,7 +47,8 @@ public class StudentService {
     }
     
     
-    public void add(Student student){
+    public boolean add(Student student){
+        boolean check = false;
         try {
             if(studentList.contains(student)){
                 JOptionPane.showMessageDialog(null, "Mã sinh viên đã tồn tại");
@@ -55,16 +56,28 @@ public class StudentService {
                 addToFile(filePath, student);
                 studentList.add(student);
                 JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                check = true;
             }
         } catch (HeadlessException | IOException ex) {
             ex.printStackTrace();
         }
+        return check;
     }
     
     public void delete(Student student){
         studentList.remove(student);
         List<Student> list = studentList;
         addRangeToFile(filePath, list);
+        JOptionPane.showMessageDialog(null, "Xóa thành công");
+    }
+    
+    public void deleteByClass_id(String class_id){
+        for(Student item : studentList){
+            if(item.getClass_id().equalsIgnoreCase(class_id)){
+                studentList.remove(item);
+            }
+        }
+        addRangeToFile(filePath, studentList);
     }
     
     public void update(Student student){
@@ -78,6 +91,7 @@ public class StudentService {
         }
         List<Student> list = studentList;
         addRangeToFile(filePath, list);
+        
     }
     
     public void setDetail(Student student) {
@@ -118,8 +132,9 @@ public class StudentService {
     
     private void addToFile(String filePath, Student student) throws IOException{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
-        writer.write(student.toString());
         writer.newLine();
+        writer.write(student.toString());
+        writer.close();
         
     }
     
