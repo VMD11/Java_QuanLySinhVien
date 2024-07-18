@@ -25,7 +25,6 @@ public class Index extends javax.swing.JFrame {
     public Index() {
         initComponents();
         
-        setTitle("Quản lý sinh viên");
         acionTransfer();
         actionMouseLogout();
     }
@@ -48,7 +47,7 @@ public class Index extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đăng xuất", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
-                    jPRoot.setVisible(false);
+                    dispose();
                     new Login().setVisible(true);
                 }
             }
@@ -104,6 +103,7 @@ public class Index extends javax.swing.JFrame {
         jPView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý sinh viên");
         setBackground(new java.awt.Color(255, 255, 204));
         setPreferredSize(new java.awt.Dimension(1350, 760));
         setResizable(false);
@@ -171,6 +171,7 @@ public class Index extends javax.swing.JFrame {
         jLLogout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLLogout.setForeground(new java.awt.Color(255, 255, 255));
         jLLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout.png"))); // NOI18N
         jLLogout.setText("Đăng xuất");
         jLLogout.setPreferredSize(new java.awt.Dimension(86, 25));
 

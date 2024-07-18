@@ -4,26 +4,44 @@
  */
 package View;
 
+import Common.CheckEmpty;
+import Component.ComboBox;
 import Component.TableMajor;
 import Model.Major;
 import Service.DepartmentService;
 import Service.MajorService;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 84362
  */
 public class ViewMajor extends javax.swing.JPanel {
-    MajorService majorService = new MajorService();
+    private MajorService majorService;
+    private DepartmentService departmentService;
     /**
      * Creates new form ViewDepartment
      */
     public ViewMajor() {
         initComponents();
-        
+        majorService = new MajorService();
+        departmentService = new DepartmentService();
         loadTable();
+        loadCB();
+    }
+    
+    private void loadCB(){
+        jCBDepartment.setModel(new ComboBox().loadComboBox(departmentService.getNameList()));
+//        jCBDepartment.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                
+//            }
+//        });
     }
 
     private void loadTable(){
@@ -50,6 +68,7 @@ public class ViewMajor extends javax.swing.JPanel {
                         String department_id = new DepartmentService().getIDByName(departmentName);
                         Major major = new Major(id, name, department_id);
                         jTName.setText(name);
+                        jCBDepartment.setSelectedItem(departmentName);
                     }
                 }
             }
@@ -80,12 +99,15 @@ public class ViewMajor extends javax.swing.JPanel {
         jTBMajor = new javax.swing.JTable();
         jTSearch = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jBtnExport = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTName = new javax.swing.JTextField();
         jBtnAdd = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jBtnUpdate = new javax.swing.JButton();
         jBtnDelete = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jCBDepartment = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setPreferredSize(new java.awt.Dimension(1050, 760));
@@ -114,6 +136,8 @@ public class ViewMajor extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1026, 350));
+
         jTBMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTBMajor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,31 +158,40 @@ public class ViewMajor extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Tìm kiếm:");
 
+        jBtnExport.setBackground(new java.awt.Color(51, 204, 0));
+        jBtnExport.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBtnExport.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnExport.setText("Xuất Excel");
+        jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1026, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(jTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(83, 83, 83))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
@@ -172,9 +205,14 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnAdd.setForeground(new java.awt.Color(255, 255, 255));
         jBtnAdd.setText("Thêm mới");
         jBtnAdd.setPreferredSize(new java.awt.Dimension(150, 40));
+        jBtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAddMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Tên ngành");
+        jLabel2.setText("Khoa");
         jLabel2.setToolTipText("");
 
         jBtnUpdate.setBackground(new java.awt.Color(255, 204, 0));
@@ -182,12 +220,30 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         jBtnUpdate.setText("Sửa");
         jBtnUpdate.setPreferredSize(new java.awt.Dimension(150, 40));
+        jBtnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnUpdateMouseClicked(evt);
+            }
+        });
 
         jBtnDelete.setBackground(new java.awt.Color(255, 0, 51));
         jBtnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnDelete.setForeground(new java.awt.Color(255, 255, 255));
         jBtnDelete.setText("Xóa");
         jBtnDelete.setPreferredSize(new java.awt.Dimension(150, 40));
+        jBtnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnDeleteMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Tên ngành");
+        jLabel4.setToolTipText("");
+
+        jCBDepartment.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCBDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBDepartment.setPreferredSize(new java.awt.Dimension(250, 40));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,30 +252,39 @@ public class ViewMajor extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(261, Short.MAX_VALUE))
+                        .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jCBDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel2)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -242,19 +307,72 @@ public class ViewMajor extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAddMouseClicked
+        if(CheckEmpty.isEmptyTextField(jTName))
+            JOptionPane.showMessageDialog(null, "Không được để trống");
+        else if(jCBDepartment.getSelectedIndex()==0)
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khoa");
+        else{
+            String name = jTName.getText();
+            String departmentName = jCBDepartment.getSelectedItem().toString();
+            String department_id = departmentService.getIDByName(departmentName);
+            majorService.add(new Major(name, department_id));
+            jTName.setText(null);
+            loadCB();
+            loadTable();
+        }
+    }//GEN-LAST:event_jBtnAddMouseClicked
+
+    private void jBtnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnUpdateMouseClicked
+        int selectedRow = jTBMajor.getSelectedRow();
+        if(selectedRow==-1)
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngành để sửa");            
+        else if(CheckEmpty.isEmptyTextField(jTName))
+            JOptionPane.showMessageDialog(null, "Không được để trống");
+        else if(jCBDepartment.getSelectedIndex()==0)
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khoa");
+        else{
+            String id = jTBMajor.getValueAt(selectedRow, 0).toString();
+            String name = jTName.getText();
+            String departmentName = jCBDepartment.getSelectedItem().toString();
+            String department_id = departmentService.getIDByName(departmentName);
+            majorService.update(new Major(id, name, department_id));
+            loadTable();
+        }
+    }//GEN-LAST:event_jBtnUpdateMouseClicked
+
+    private void jBtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDeleteMouseClicked
+        int selectedRow = jTBMajor.getSelectedRow();
+        if(selectedRow==-1)
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngành để xóa");            
+        else{
+            String id = jTBMajor.getValueAt(selectedRow, 0).toString();            
+            String name = jTName.getText();
+            String departmentName = jCBDepartment.getSelectedItem().toString();
+            String department_id = departmentService.getIDByName(departmentName);
+            int result = JOptionPane.showConfirmDialog(null, "Hành động này sẽ xóa tất cả các sinh viên, các lớp thuộc ngành này. Bạn có chắc chắn muốn xóa không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
+            if(result==JOptionPane.YES_OPTION){
+                majorService.delete(new Major(id, name, department_id));
+                loadTable();
+            }
+        }
+    }//GEN-LAST:event_jBtnDeleteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnDelete;
+    private javax.swing.JButton jBtnExport;
     private javax.swing.JButton jBtnUpdate;
+    private javax.swing.JComboBox<String> jCBDepartment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

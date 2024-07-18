@@ -32,7 +32,6 @@ public class DetailStudent extends javax.swing.JFrame {
      */
     public DetailStudent() {
         initComponents();
-        setTitle("Chi tiết sinh viên");
         btnGroup.add(jRadMale);
         btnGroup.add(jRadFemale);
         loadCB();
@@ -45,10 +44,15 @@ public class DetailStudent extends javax.swing.JFrame {
         jTName.setText(student.getFullName());
         jTBirthday.setText(student.getBirthday());
         jTHomeland.setText(student.getHomeland());
-        if(student.getGender()==0) jRadMale.isSelected();
-        else jRadFemale.isSelected();
+        if(student.getGender()==0) jRadMale.setSelected(true);
+        else jRadFemale.setSelected(true);
         jTGPA.setText(String.valueOf(student.getGPA()));
-        jCbDepartment.setSelectedIndex(0);
+        String className = classService.getNameByID(student.getClass_id());
+        String majorName = majorService.getNameByID(classService.getMajor_idByID(student.getClass_id()));
+        String departmentName = departmentService.getNameByID(majorService.getDepartmentIDByID(majorService.getIDByName(majorName)));
+        jCbDepartment.setSelectedItem(departmentName);
+        jCbMajor.setSelectedItem(majorName);
+        jCbClass.setSelectedItem(className);
     }
     
     private void loadCB(){
@@ -117,6 +121,7 @@ public class DetailStudent extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setTitle("Chi tiết sinh viên");
         setResizable(false);
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 204));
@@ -386,7 +391,6 @@ public class DetailStudent extends javax.swing.JFrame {
 
         jRadMale.setBackground(new java.awt.Color(255, 255, 204));
         jRadMale.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jRadMale.setSelected(true);
         jRadMale.setText("Nam");
         jRadMale.setPreferredSize(new java.awt.Dimension(100, 29));
 
@@ -422,7 +426,7 @@ public class DetailStudent extends javax.swing.JFrame {
         jPanel12.setBackground(new java.awt.Color(255, 255, 204));
         jPanel12.setPreferredSize(new java.awt.Dimension(850, 50));
 
-        jBtnUpdate.setBackground(new java.awt.Color(51, 102, 255));
+        jBtnUpdate.setBackground(new java.awt.Color(255, 204, 0));
         jBtnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         jBtnUpdate.setText("Cập nhật");
@@ -596,7 +600,10 @@ public class DetailStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDeleteMouseClicked
-        
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa sinh viên này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if(result==JOptionPane.YES_OPTION){
+            
+        }
         
         
     }//GEN-LAST:event_jBtnDeleteMouseClicked
@@ -627,38 +634,38 @@ public class DetailStudent extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DetailStudent().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new DetailStudent().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDelete;

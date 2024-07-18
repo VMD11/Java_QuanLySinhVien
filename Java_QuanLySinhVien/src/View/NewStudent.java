@@ -5,6 +5,7 @@
 package View;
 
 import Common.CheckEmpty;
+import Common.DataUpdateListener;
 import Common.Regex;
 import Component.ComboBox;
 import Model.Student;
@@ -21,20 +22,30 @@ import javax.swing.JOptionPane;
  * @author 84362
  */
 public class NewStudent extends javax.swing.JFrame {
-    StudentService studentService = new StudentService();
-    DepartmentService departmentService = new DepartmentService();
-    MajorService majorService = new MajorService();
-    ClassesService classService = new ClassesService();
-    Student student = null;
-    ButtonGroup btnGroup = new ButtonGroup();
+    private StudentService studentService;
+    private DepartmentService departmentService;
+    private MajorService majorService;
+    private ClassesService classService;
+    private Student student = null;
+    private ButtonGroup btnGroup = new ButtonGroup();
+    private DataUpdateListener listener;
     /**
      * Creates new form NewStudent
+     * @param listener
      */
-    public NewStudent() {
+    public NewStudent(DataUpdateListener listener) {
+        this.listener = listener;
         initComponents();
-        setTitle("Thêm sinh viên");
+        studentService = new StudentService();
+        departmentService = new DepartmentService();
+        majorService = new MajorService();
+        classService = new ClassesService();
         btnGroup.add(jRadMale);
         btnGroup.add(jRadFemale);
+        loadCB();
+    }
+    
+    private void loadCB(){
         jCbDepartment.setModel(new ComboBox().loadComboBox(departmentService.getNameList()));
         jCbDepartment.addActionListener(new ActionListener(){
             @Override
@@ -54,7 +65,6 @@ public class NewStudent extends javax.swing.JFrame {
         });
         jCbMajor.setSelectedIndex(0);
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +110,8 @@ public class NewStudent extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm sinh viên");
         setResizable(false);
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 204));
@@ -560,64 +572,65 @@ public class NewStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAddMouseClicked
-        
-        if(CheckEmpty.isEmptyTextField(jTID)||CheckEmpty.isEmptyTextField(jTName)||CheckEmpty.isEmptyTextField(jTBirthday)||
-           CheckEmpty.isEmptyTextField(jTHomeland)||CheckEmpty.isEmptyTextField(jTGPA)){
-            JOptionPane.showMessageDialog(null , "Không được để trống");
-        }else if(!jTGPA.getText().matches(Regex.regexGPA())){
-            JOptionPane.showMessageDialog(null , "GPA phải là số thập phân");
-        }
-        else{
+        if (CheckEmpty.isEmptyTextField(jTID) || CheckEmpty.isEmptyTextField(jTName) || CheckEmpty.isEmptyTextField(jTBirthday)
+                || CheckEmpty.isEmptyTextField(jTHomeland) || CheckEmpty.isEmptyTextField(jTGPA)) {
+            JOptionPane.showMessageDialog(null, "Không được để trống");
+        } else if (!jTGPA.getText().matches(Regex.regexGPA())) {
+            JOptionPane.showMessageDialog(null, "GPA phải là số thập phân");
+        } else {
             String id = jTID.getText();
             String fullName = jTName.getText();
             String birthday = jTBirthday.getText();
             int gender = 0;
-            if(jRadFemale.isSelected()) gender = 1;
+            if (jRadFemale.isSelected()) {
+                gender = 1;
+            }
             String homeland = jTHomeland.getText();
             double GPA = Double.parseDouble(jTGPA.getText());
             String class_id = classService.getIDByName(jCbClass.getSelectedItem().toString());
-        
             student = new Student(id, fullName, birthday, homeland, gender, class_id, GPA);
-            //studentService.addNewStudent(student);
-            JOptionPane.showMessageDialog(null , student.toString());
+
+            if (studentService.add(student)) {
+                listener.onDataUpdate();
+                dispose();
+            }
         }
-        
     }//GEN-LAST:event_jBtnAddMouseClicked
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewStudent().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(NewStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new NewStudent().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
