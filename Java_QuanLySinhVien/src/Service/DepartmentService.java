@@ -29,6 +29,7 @@ public class DepartmentService {
     }
 
     public List<Department> getDepartmentList() {
+        Collections.sort(departmentList);
         return departmentList;
     }
     

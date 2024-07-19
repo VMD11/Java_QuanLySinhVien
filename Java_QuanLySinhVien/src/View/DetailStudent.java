@@ -5,6 +5,7 @@
 package View;
 
 import Common.CheckEmpty;
+import Common.DataUpdateListener;
 import Common.Regex;
 import Component.ComboBox;
 import Model.Student;
@@ -21,17 +22,26 @@ import javax.swing.JOptionPane;
  * @author 84362
  */
 public class DetailStudent extends javax.swing.JFrame {
-    StudentService studentService = new StudentService();
-    DepartmentService departmentService = new DepartmentService();
-    MajorService majorService = new MajorService();
-    ClassesService classService = new ClassesService();
-    Student student = studentService.getDetail();
-    ButtonGroup btnGroup = new ButtonGroup();
+    private StudentService studentService;
+    private DepartmentService departmentService;
+    private MajorService majorService;
+    private ClassesService classService;
+    private Student student;
+    private ButtonGroup btnGroup;
+    private DataUpdateListener listener;
     /**
      * Creates new form NewStudent
+     * @param listener 
      */
-    public DetailStudent() {
+    public DetailStudent(DataUpdateListener listener) {
         initComponents();
+        this.listener = listener;
+        studentService = new StudentService();
+        departmentService = new DepartmentService();
+        majorService = new MajorService();
+        classService = new ClassesService();
+        student = studentService.getDetail();
+        btnGroup = new ButtonGroup();
         btnGroup.add(jRadMale);
         btnGroup.add(jRadFemale);
         loadCB();
@@ -602,20 +612,29 @@ public class DetailStudent extends javax.swing.JFrame {
     private void jBtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDeleteMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa sinh viên này", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if(result==JOptionPane.YES_OPTION){
-            
+            studentService.delete(student);
+            listener.onDataUpdate();
+            dispose();
         }
         
         
     }//GEN-LAST:event_jBtnDeleteMouseClicked
 
+    private boolean isSuccess(){
+        boolean check = false;
+        if (CheckEmpty.isEmptyTextField(jTID) || CheckEmpty.isEmptyTextField(jTName) || CheckEmpty.isEmptyTextField(jTBirthday)
+                || CheckEmpty.isEmptyTextField(jTHomeland) || CheckEmpty.isEmptyTextField(jTGPA)) {
+            JOptionPane.showMessageDialog(null, "Không được để trống");
+        } else if (!jTGPA.getText().matches(Regex.regexGPA()) || Double.parseDouble(jTGPA.getText())<0 || Double.parseDouble(jTGPA.getText())>4) {
+            JOptionPane.showMessageDialog(null, "GPA không là số thập phân hoặc không trong phạm vi(0.0 -> 4.0)");
+        } else if(!jTBirthday.getText().matches(Regex.regexBirthday())){
+            JOptionPane.showMessageDialog(null, "Ngày sinh không đúng định dạng (dd/MM/yyyy) hoặc không tồn tại");
+        }else check = true;
+        return check;
+    }
+    
     private void jBtnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnUpdateMouseClicked
-        if(CheckEmpty.isEmptyTextField(jTID)||CheckEmpty.isEmptyTextField(jTName)||CheckEmpty.isEmptyTextField(jTBirthday)||
-           CheckEmpty.isEmptyTextField(jTHomeland)||CheckEmpty.isEmptyTextField(jTGPA)){
-            JOptionPane.showMessageDialog(null , "Không được để trống");
-        }else if(!jTGPA.getText().matches(Regex.regexGPA())){
-            JOptionPane.showMessageDialog(null , "GPA phải là số thập phân");
-        }
-        else{
+        if(isSuccess()){
             String id = jTID.getText();
             String fullName = jTName.getText();
             String birthday = jTBirthday.getText();
@@ -626,46 +645,10 @@ public class DetailStudent extends javax.swing.JFrame {
             String class_id = classService.getIDByName(jCbClass.getSelectedItem().toString());
         
             student = new Student(id, fullName, birthday, homeland, gender, class_id, GPA);
-            //studentService.addNewStudent(student);
-            JOptionPane.showMessageDialog(null , student.toString());
+            studentService.update(student);
+            listener.onDataUpdate();
         }
     }//GEN-LAST:event_jBtnUpdateMouseClicked
-    
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(DetailStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new DetailStudent().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDelete;

@@ -5,7 +5,6 @@
 package View;
 import Service.UserService;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
@@ -211,23 +210,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        this.setVisible(false);
-        new Index().setVisible(true);
         
-//        String userName = txtUserName.getText();
-//        char[] pass = txtPassword.getPassword();
-//        String password = new String(pass);
-//        if(userName.equals("") || password.equals("")){
-//            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-//        }else{
-//            if(userService.checkUser(userName,password)){
-//                JOptionPane.showMessageDialog(null, "Đănng nhập thành công");
-//                this.setVisible(false);
-//                new Index().setVisible(true);
-//            }else
-//                JOptionPane.showMessageDialog(null, "Thông tin tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại");
-//            userService.getUserList();
-//        }
+        
+        String userName = txtUserName.getText();
+        char[] pass = txtPassword.getPassword();
+        String password = new String(pass);
+        if(userName.equals("") || password.equals("")){
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+        }else{
+            if(userService.checkUser(userName,password)){
+                JOptionPane.showMessageDialog(null, "Đănng nhập thành công");
+                this.setVisible(false);
+                new Index().setVisible(true);
+            }else
+                JOptionPane.showMessageDialog(null, "Thông tin tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại");
+            userService.getUserList();
+        }
     }//GEN-LAST:event_btnLoginMouseClicked
 
     

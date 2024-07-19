@@ -38,7 +38,11 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         classService = new ClassesService();
         loadCB();
         loadTable();
-        onDataUpdate();
+        loadActionTable();
+    }
+    
+    private void loadTable(){
+        jTStudent.setModel(new TableStudent(new StudentService()));
     }
     
     private void loadCB(){
@@ -62,11 +66,10 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         jCbMajor.setSelectedIndex(0);
     }
     
-    private void loadTable(){
-        jTStudent.setModel(new TableStudent(studentService));
+    private void loadActionTable(){
+        
+        jTStudent.setRowHeight(20);
         jTStudent.addMouseListener(new MouseListener() {
-            
-
             @Override
             public void mouseReleased(MouseEvent e) {
             }
@@ -92,7 +95,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
                         String class_id = classService.getIDByName(className);
                         student = new Student(id, name, birthday, homeland, gender, class_id, GPA);
                         studentService.setDetail(student);
-                        new DetailStudent().setVisible(true);
+                        new DetailStudent(ViewStudent.this).setVisible(true);
                     }
                 }
             }
@@ -189,7 +192,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnNewStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jCbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jCbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -265,7 +268,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
                     .addComponent(jTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jBtnExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -290,12 +293,13 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnNewStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewStudentMouseClicked
-        new NewStudent(ViewStudent.this).setVisible(true);
+        NewStudent newStudent = new NewStudent(ViewStudent.this);
+        newStudent.setVisible(true);
     }//GEN-LAST:event_jBtnNewStudentMouseClicked
 
 
@@ -317,6 +321,8 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
 
     @Override
     public void onDataUpdate() {
-        jTStudent.setModel(new TableStudent(studentService));
+        loadTable();
     }
+
+    
 }

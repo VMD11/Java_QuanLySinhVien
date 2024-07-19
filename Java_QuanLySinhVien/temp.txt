@@ -1,1 +1,1 @@
-Student{id=d, fullName=d, birthday=d, homeland=d, gender=1, class_id=146112, GPA=4.0}
+Student{id=5, fullName=5, birthday=5, homeland=5, gender=0, class_id=146112, GPA=5.0}

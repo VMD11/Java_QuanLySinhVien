@@ -51,9 +51,8 @@ public class ViewClass extends javax.swing.JPanel {
     
     private void loadTable(){
         jTBClass.setModel(new TableClass(classService));
+        jTBClass.setRowHeight(20);
         jTBClass.addMouseListener(new MouseListener() {
-            
-
             @Override
             public void mouseReleased(MouseEvent e) {
             }

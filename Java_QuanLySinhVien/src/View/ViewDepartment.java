@@ -29,9 +29,8 @@ public class ViewDepartment extends javax.swing.JPanel {
 
     private void loadTable(){
         jTBDepartment.setModel(new TableDepartment(departmentService));
+        jTBDepartment.setRowHeight(20);
         jTBDepartment.addMouseListener(new MouseListener() {
-            
-
             @Override
             public void mouseReleased(MouseEvent e) {
             }
@@ -47,7 +46,7 @@ public class ViewDepartment extends javax.swing.JPanel {
                     if (selectedRow != -1) {
                         String id = jTBDepartment.getValueAt(selectedRow, 0).toString();
                         String name = jTBDepartment.getValueAt(selectedRow, 1).toString();
-                        Department department = new Department(id, name);
+                        //Department department = new Department(id, name);
                         jTName.setText(name);
                     }
                 }

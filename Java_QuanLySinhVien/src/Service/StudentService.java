@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -28,6 +29,7 @@ public class StudentService {
     }
     
     public List<Student> getStudentList() {
+        Collections.sort(studentList);
         return studentList;
     }
     
@@ -91,7 +93,7 @@ public class StudentService {
         }
         List<Student> list = studentList;
         addRangeToFile(filePath, list);
-        
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
     }
     
     public void setDetail(Student student) {

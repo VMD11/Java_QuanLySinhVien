@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ public class MajorService {
     }
 
     public List<Major> getMajorList() {
+        Collections.sort(majorList);
         return majorList;
     }
     

@@ -9,5 +9,5 @@ package Common;
  * @author 84362
  */
 public interface DataUpdateListener {
-    void onDataUpdate();
+    public void onDataUpdate();
 }

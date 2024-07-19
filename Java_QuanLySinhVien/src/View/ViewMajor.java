@@ -46,9 +46,8 @@ public class ViewMajor extends javax.swing.JPanel {
 
     private void loadTable(){
         jTBMajor.setModel(new TableMajor(majorService));
+        jTBMajor.setRowHeight(20);
         jTBMajor.addMouseListener(new MouseListener() {
-            
-
             @Override
             public void mouseReleased(MouseEvent e) {
             }

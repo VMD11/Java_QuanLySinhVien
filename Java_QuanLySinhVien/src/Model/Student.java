@@ -6,12 +6,13 @@ package Model;
 
 import Service.ClassesService;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  *
  * @author 84362
  */
-public class Student {
+public class Student implements Comparable<Student>{
     private String id;
     private String fullName;
     private String birthday;
@@ -22,6 +23,17 @@ public class Student {
 
     public Student() {
     }
+
+    public Student(String fullName, String birthday, String homeland, int gender, String class_id, double GPA) {
+        this.id = String.valueOf(new Random().nextInt(2024609999-2020600000+1)+2020600000);
+        this.fullName = fullName;
+        this.birthday = birthday;
+        this.homeland = homeland;
+        this.gender = gender;
+        this.class_id = class_id;
+        this.GPA = GPA;
+    }
+    
 
     public Student(String id, String fullName, String birthday, String homeland, int gender, String class_id, double GPA) {
         this.id = id;
@@ -120,6 +132,11 @@ public class Student {
         }
         final Student other = (Student) obj;
         return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return this.fullName.compareTo(o.getFullName());
     }
 
 }
