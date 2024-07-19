@@ -10,11 +10,11 @@ import Component.TableMajor;
 import Model.Major;
 import Service.DepartmentService;
 import Service.MajorService;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 public class ViewMajor extends javax.swing.JPanel {
     private MajorService majorService;
     private DepartmentService departmentService;
+    private TableMajor tableMajor;
     /**
      * Creates new form ViewDepartment
      */
@@ -30,22 +31,18 @@ public class ViewMajor extends javax.swing.JPanel {
         initComponents();
         majorService = new MajorService();
         departmentService = new DepartmentService();
+        tableMajor = new TableMajor(new MajorService());
         loadTable();
         loadCB();
+        searchActionListener();
     }
     
     private void loadCB(){
         jCBDepartment.setModel(new ComboBox().loadComboBox(departmentService.getNameList()));
-//        jCBDepartment.addActionListener(new ActionListener(){
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//            }
-//        });
     }
 
     private void loadTable(){
-        jTBMajor.setModel(new TableMajor(majorService));
+        jTBMajor.setModel(tableMajor);
         jTBMajor.setRowHeight(20);
         jTBMajor.addMouseListener(new MouseListener() {
             @Override
@@ -80,6 +77,29 @@ public class ViewMajor extends javax.swing.JPanel {
             public void mouseExited(MouseEvent e) {
             }
             
+        });
+    }
+    
+    private void searchActionListener(){
+        jTSearch.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updatTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updatTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updatTable();
+            }
+            
+            void updatTable(){
+                tableMajor.search(jTSearch.getText());
+            }
         });
     }
     /**
@@ -161,6 +181,7 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnExport.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnExport.setForeground(new java.awt.Color(255, 255, 255));
         jBtnExport.setText("Xuất Excel");
+        jBtnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -203,6 +224,7 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnAdd.setForeground(new java.awt.Color(255, 255, 255));
         jBtnAdd.setText("Thêm mới");
+        jBtnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAdd.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -218,6 +240,7 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         jBtnUpdate.setText("Sửa");
+        jBtnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnUpdate.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -229,6 +252,7 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnDelete.setForeground(new java.awt.Color(255, 255, 255));
         jBtnDelete.setText("Xóa");
+        jBtnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnDelete.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

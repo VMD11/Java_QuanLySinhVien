@@ -8,6 +8,7 @@ import Model.Student;
 import Service.StudentService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,9 +18,33 @@ import javax.swing.table.AbstractTableModel;
 public class TableStudent extends AbstractTableModel{
         private String[] title = {"Mã sinh viên","Họ tên","Giới tính","Ngày sinh","GPA","Lớp","Quê quán"};
         private Class[] classes = {String.class,String.class,String.class,String.class,String.class,String.class,String.class};
-        private List<Student> studentList = new ArrayList<>();
-        public TableStudent(StudentService studentService) {
-            studentList = studentService.getStudentList();
+        private List<Student> studentList;
+        private List<Student> students;
+        public TableStudent(StudentService studentService){
+            students = studentService.getStudentList();
+            studentList = new ArrayList<>(students);
+        }
+        
+        public void search(String key){
+            if(key.trim().isEmpty()){
+                studentList = new ArrayList<>(students);
+            }else{
+                studentList = students.stream()
+                                      .filter(s -> s.getFullName().toUpperCase().contains(key.toUpperCase()))
+                                      .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
+        }
+        
+        public void filter(String name){
+            if(name.equalsIgnoreCase("Tất cả lớp")){
+                studentList = new ArrayList<>(students);
+            }else{
+                studentList = students.stream()
+                                      .filter(s -> s.getClassName().contains(name))
+                                      .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
         }
         
         @Override
@@ -40,9 +65,7 @@ public class TableStudent extends AbstractTableModel{
                 case 1:
                     return studentList.get(rowIndex).getFullName();
                 case 2:
-                    if(studentList.get(rowIndex).getGender()==0)
-                        return "Nam";
-                    return "Nữ";
+                    return studentList.get(rowIndex).getGender()==0 ? "Nam" : "Nữ";
                 case 3:
                     return studentList.get(rowIndex).getBirthday();
                 case 4:

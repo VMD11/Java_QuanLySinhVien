@@ -435,6 +435,7 @@ public class DetailStudent extends javax.swing.JFrame {
         jBtnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         jBtnUpdate.setText("Cập nhật");
+        jBtnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnUpdate.setPreferredSize(new java.awt.Dimension(150, 50));
         jBtnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -446,6 +447,7 @@ public class DetailStudent extends javax.swing.JFrame {
         jBtnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnDelete.setForeground(new java.awt.Color(255, 255, 255));
         jBtnDelete.setText("Xóa");
+        jBtnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnDelete.setPreferredSize(new java.awt.Dimension(150, 50));
         jBtnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

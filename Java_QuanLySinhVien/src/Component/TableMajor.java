@@ -6,7 +6,9 @@ package Component;
 
 import Model.Major;
 import Service.MajorService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,8 +19,21 @@ public class TableMajor extends AbstractTableModel{
     private String[] title = {"Mã ngành","Tên ngành","Khoa"};
         private Class[] classes = {String.class,String.class,String.class};
         private List<Major> majorList;
+        private List<Major> majors;
         public TableMajor(MajorService majorService) {
-           majorList = majorService.getMajorList();
+           majors = majorService.getMajorList();
+           majorList = new ArrayList<>(majors);
+        }
+        
+        public void search(String key){
+            if(key.trim().isEmpty()){
+                majorList = new ArrayList<>(majors);
+            }else{
+                majorList = majors.stream()
+                                      .filter(s -> s.getName().toUpperCase().contains(key.toUpperCase()))
+                                      .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
         }
         
         @Override

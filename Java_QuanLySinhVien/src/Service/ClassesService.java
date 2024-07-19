@@ -85,10 +85,17 @@ public class ClassesService {
         String parentName = jComboBox.getSelectedItem().toString();
         String parentId = new MajorService().getIDByName(parentName);
         List<String> list = new ArrayList<>();
-        for(Classes item : classList){
-            if(item.getMajor_id().equalsIgnoreCase(parentId))
+        if(parentName.equalsIgnoreCase("Tất cả ngành")){
+            for(Classes item : classList){
                 list.add(item.getName());
+            }
+        }else{
+            for(Classes item : classList){
+                if(item.getMajor_id().equalsIgnoreCase(parentId))
+                    list.add(item.getName());
+            }
         }
+        list.add(0, "Tất cả Lớp");
         return list;
     }
     

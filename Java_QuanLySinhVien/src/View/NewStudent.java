@@ -386,6 +386,7 @@ public class NewStudent extends javax.swing.JFrame {
         jBtnAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnAdd.setForeground(new java.awt.Color(255, 255, 255));
         jBtnAdd.setText("Thêm mới");
+        jBtnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAdd.setPreferredSize(new java.awt.Dimension(150, 50));
         jBtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

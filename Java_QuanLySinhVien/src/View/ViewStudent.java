@@ -13,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -23,6 +26,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
     private DepartmentService departmentService;
     private MajorService majorService;
     private ClassesService classService;
+    private TableStudent tableStudent;
     private Student student;
     /**
      * Creates new form MainHome
@@ -33,13 +37,15 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         departmentService = new DepartmentService();
         majorService = new MajorService();
         classService = new ClassesService();
+        tableStudent = new TableStudent(new StudentService());
         loadCB();
         loadTable();
-        loadActionTable();
+        tableMouseListener();
+        searchDocumentListener();
     }
     
     private void loadTable(){
-        jTStudent.setModel(new TableStudent(new StudentService()));
+        jTStudent.setModel(tableStudent);
     }
     
     private void loadCB(){
@@ -49,21 +55,52 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
             public void actionPerformed(ActionEvent e) {
                 jCbMajor.setModel(new ComboBox().loadComboBox(majorService.getNameList(jCbDepartment)));
                 jCbClass.setModel(new ComboBox().loadComboBox(classService.getNameList(jCbMajor)));
+                tableStudent.filter(jCbClass.getSelectedItem().toString());
             }
-            
         });
         jCbDepartment.setSelectedIndex(0);
         jCbMajor.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 jCbClass.setModel(new ComboBox().loadComboBox(classService.getNameList(jCbMajor)));
+                tableStudent.filter(jCbClass.getSelectedItem().toString());
             }
-            
         });
         jCbMajor.setSelectedIndex(0);
+        jCbClass.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableStudent.filter(jCbClass.getSelectedItem().toString());
+            }
+        });
+        
+        
     }
     
-    private void loadActionTable(){
+    private void searchDocumentListener(){
+        jTSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateTable();
+            }
+
+            private void updateTable() {
+                tableStudent.search(jTSearch.getText());
+            }
+        });
+    }
+    
+    private void tableMouseListener(){
         
         jTStudent.setRowHeight(20);
         jTStudent.addMouseListener(new MouseListener() {
@@ -173,6 +210,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         jBtnNewStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnNewStudent.setForeground(new java.awt.Color(255, 255, 255));
         jBtnNewStudent.setText("Thêm mới");
+        jBtnNewStudent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnNewStudent.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnNewStudent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -238,6 +276,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         jBtnExport.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnExport.setForeground(new java.awt.Color(255, 255, 255));
         jBtnExport.setText("Xuất Excel");
+        jBtnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

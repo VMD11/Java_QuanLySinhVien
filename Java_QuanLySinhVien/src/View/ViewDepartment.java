@@ -11,24 +11,29 @@ import Service.DepartmentService;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
  * @author 84362
  */
 public class ViewDepartment extends javax.swing.JPanel {
-    DepartmentService departmentService = new DepartmentService();
+    private DepartmentService departmentService;
+    private TableDepartment tableDepartment;
     /**
      * Creates new form ViewDepartment
      */
     public ViewDepartment() {
         initComponents();
-        
+        departmentService = new DepartmentService();
+        tableDepartment = new TableDepartment(new DepartmentService());
         loadTable();
+        searchActionListener();
     }
 
     private void loadTable(){
-        jTBDepartment.setModel(new TableDepartment(departmentService));
+        jTBDepartment.setModel(tableDepartment);
         jTBDepartment.setRowHeight(20);
         jTBDepartment.addMouseListener(new MouseListener() {
             @Override
@@ -60,6 +65,29 @@ public class ViewDepartment extends javax.swing.JPanel {
             public void mouseExited(MouseEvent e) {
             }
             
+        });
+    }
+    
+    private void searchActionListener(){
+        jTSearch.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updatTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updatTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updatTable();
+            }
+            
+            void updatTable(){
+                tableDepartment.search(jTSearch.getText());
+            }
         });
     }
     /**
@@ -139,6 +167,7 @@ public class ViewDepartment extends javax.swing.JPanel {
         jBtnExport.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnExport.setForeground(new java.awt.Color(255, 255, 255));
         jBtnExport.setText("Xuất Excel");
+        jBtnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -181,6 +210,7 @@ public class ViewDepartment extends javax.swing.JPanel {
         jBtnAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnAdd.setForeground(new java.awt.Color(255, 255, 255));
         jBtnAdd.setText("Thêm mới");
+        jBtnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAdd.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -196,6 +226,7 @@ public class ViewDepartment extends javax.swing.JPanel {
         jBtnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         jBtnUpdate.setText("Sửa");
+        jBtnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnUpdate.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -207,6 +238,7 @@ public class ViewDepartment extends javax.swing.JPanel {
         jBtnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBtnDelete.setForeground(new java.awt.Color(255, 255, 255));
         jBtnDelete.setText("Xóa");
+        jBtnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnDelete.setPreferredSize(new java.awt.Dimension(150, 40));
         jBtnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

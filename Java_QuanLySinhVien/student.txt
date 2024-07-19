@@ -4,7 +4,7 @@ Student{id=2023, fullName=nguyễn văn c, birthday=21/1/2000, homeland=Hà Nộ
 Student{id=1, fullName=test nào, birthday=12/02/2002, homeland=1, gender=1, class_id=146112, GPA=1.0}
 Student{id=2, fullName=1, birthday=1, homeland=1, gender=1, class_id=146112, GPA=1.0}
 Student{id=3, fullName=3, birthday=3, homeland=3, gender=1, class_id=146112, GPA=3.0}
-Student{id=4, fullName=4, birthday=30/04/2000, homeland=4, gender=1, class_id=166018, GPA=4.0}
+Student{id=4, fullName=4, birthday=30/04/2000, homeland=Hà Nam, gender=1, class_id=166018, GPA=4.0}
 Student{id=q, fullName=q, birthday=q, homeland=q, gender=1, class_id=193917, GPA=3.0}
 Student{id=w, fullName=ư, birthday=ư, homeland=ư, gender=1, class_id=146112, GPA=2.0}
 Student{id=x, fullName=x, birthday=x, homeland=x, gender=1, class_id=146112, GPA=2.0}

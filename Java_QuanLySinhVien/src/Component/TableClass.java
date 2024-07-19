@@ -6,7 +6,9 @@ package Component;
 
 import Model.Classes;
 import Service.ClassesService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,8 +19,21 @@ public class TableClass extends AbstractTableModel{
     private String[] title = {"Mã lớp","Tên lớp","Ngành"};
         private Class[] classes = {String.class,String.class,String.class};
         private List<Classes> classList;
+        private List<Classes> classs;
         public TableClass(ClassesService classesService) {
-           classList = classesService.getClassList();
+           classs = classesService.getClassList();
+           classList = new ArrayList<>(classs);
+        }
+        
+        public void search(String key){
+            if(key.trim().isEmpty()){
+                classList = new ArrayList<>(classs);
+            }else{
+                classList = classs.stream()
+                                      .filter(s -> s.getName().toUpperCase().contains(key.toUpperCase()))
+                                      .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
         }
         
         @Override

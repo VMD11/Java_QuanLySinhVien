@@ -85,6 +85,7 @@ public class MajorService {
         String parentName = jComboBox.getSelectedItem().toString();
         String parentId = new DepartmentService().getIDByName(parentName);
         List<String> list = new ArrayList<>();
+        list.add(0, "Tất cả Ngành");
         if(parentName.equalsIgnoreCase("Tất cả Khoa")){
             for(Major item : majorList)
                 list.add(item.getName());

@@ -6,7 +6,9 @@ package Component;
 
 import Model.Department;
 import Service.DepartmentService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,8 +19,21 @@ public class TableDepartment extends AbstractTableModel{
     private String[] title = {"Mã khoa","Tên khoa"};
     private Class[] classes = {String.class,String.class};
     private List<Department> departmentList;
+    private List<Department> departments;
     public TableDepartment(DepartmentService departmentService) {
-       departmentList = departmentService.getDepartmentList();
+       departments = departmentService.getDepartmentList();
+       departmentList = new ArrayList<>(departments);
+    }
+    
+    public void search(String key){
+        if(key.trim().isEmpty()){
+                departmentList = new ArrayList<>(departments);
+            }else{
+                departmentList = departments.stream()
+                                      .filter(s -> s.getName().toUpperCase().contains(key.toUpperCase()))
+                                      .collect(Collectors.toList());
+            }
+            fireTableDataChanged();
     }
 
     @Override
