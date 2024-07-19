@@ -220,14 +220,16 @@ public class Login extends javax.swing.JFrame {
         }else{
             if(userService.checkUser(userName,password)){
                 JOptionPane.showMessageDialog(null, "Đănng nhập thành công");
-                this.setVisible(false);
+                dispose();
                 new Index().setVisible(true);
             }else
                 JOptionPane.showMessageDialog(null, "Thông tin tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại");
             userService.getUserList();
         }
     }//GEN-LAST:event_btnLoginMouseClicked
-
+    public static void main(String[] args) {
+        new Login().setVisible(true);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

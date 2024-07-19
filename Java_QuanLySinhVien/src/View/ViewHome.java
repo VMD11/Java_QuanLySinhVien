@@ -4,11 +4,7 @@
  */
 package View;
 
-import Service.ClassesService;
-import Service.DepartmentService;
-import Service.MajorService;
-import Service.StudentService;
-
+import Service.*;
 /**
  *
  * @author 84362

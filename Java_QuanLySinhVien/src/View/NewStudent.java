@@ -4,15 +4,10 @@
  */
 package View;
 
-import Common.CheckEmpty;
-import Common.DataUpdateListener;
-import Common.Regex;
+import Common.*;
 import Component.ComboBox;
 import Model.Student;
-import Service.ClassesService;
-import Service.DepartmentService;
-import Service.MajorService;
-import Service.StudentService;
+import Service.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
@@ -570,6 +565,10 @@ public class NewStudent extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jBtnAddMouseClicked
+    
+    public static void main(String[] args) {
+        new NewStudent(new ViewStudent()).setVisible(true);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;

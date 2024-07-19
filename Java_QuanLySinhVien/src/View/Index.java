@@ -369,7 +369,9 @@ public class Index extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    public static void main(String[] args) {
+        new Index().setVisible(true);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
