@@ -7,9 +7,40 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Java_QuanLySinhVien" default="default" basedir=".">
+<project name="Java_QuanLySinhVien" default="compile" basedir=".">
     <description>Builds, tests, and runs the project Java_QuanLySinhVien.</description>
     <import file="nbproject/build-impl.xml"/>
+
+    <property name="lib.dir" value="lib"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false" classpathref="classpath"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="dist"/>
+        <jar destfile="dist/Java_QuanLySinhVien.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Manifest-Version" value="1.0"/>
+                <attribute name="Main-Class" value="Main.Main"/> <!-- Đảm bảo đây là lớp chính chính xác -->
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="compile">
+        <java jar="dist/Java_QuanLySinhVien.jar" fork="true" classpathref="classpath"/>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
