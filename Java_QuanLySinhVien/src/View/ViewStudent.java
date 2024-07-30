@@ -5,7 +5,9 @@
 package View;
 
 import Common.DataUpdateListener;
+import Common.ExportExcel;
 import Component.ComboBox;
+import Component.Dialog;
 import Service.*;
 import Component.TableStudent;
 import Model.Student;
@@ -13,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -42,6 +43,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         loadTable();
         tableMouseListener();
         searchDocumentListener();
+        export();
     }
     
     private void loadTable(){
@@ -73,8 +75,6 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
                 tableStudent.filter(jCbClass.getSelectedItem().toString());
             }
         });
-        
-        
     }
     
     private void searchDocumentListener(){
@@ -143,6 +143,18 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
             }
             
         });
+    }
+    
+    private void export(){
+        jBtnExport.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filePath = "student_sheet.xlsx";
+                Dialog.createDialog(1500, "Xin chờ...");
+                ExportExcel.exportTable(jTStudent, filePath);
+            }
+        });
+        
     }
     
     /**

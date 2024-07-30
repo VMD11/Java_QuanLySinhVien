@@ -6,6 +6,7 @@ package View;
 
 import Common.*;
 import Component.ComboBox;
+import Component.Dialog;
 import Model.Student;
 import Service.*;
 import java.awt.event.ActionEvent;
@@ -543,6 +544,8 @@ public class NewStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "GPA không là số thập phân hoặc không trong phạm vi(0.0 -> 4.0)");
         } else if(!jTBirthday.getText().matches(Regex.regexBirthday())){
             JOptionPane.showMessageDialog(null, "Ngày sinh không đúng định dạng (dd/MM/yyyy) hoặc không tồn tại");
+        }else if(jCbClass.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn lớp");
         }else check = true;
         return check;
     }
@@ -559,7 +562,7 @@ public class NewStudent extends javax.swing.JFrame {
             double GPA = Double.parseDouble(jTGPA.getText());
             String class_id = classService.getIDByName(jCbClass.getSelectedItem().toString());
             student = new Student(fullName, birthday, homeland, gender, class_id, GPA);
-
+            Dialog.createDialog(1500, "Xin chờ...");
             if (studentService.add(student)) {
                 listener.onDataUpdate();
                 dispose();
@@ -567,9 +570,9 @@ public class NewStudent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnAddMouseClicked
     
-    public static void main(String[] args) {
-        new NewStudent(new ViewStudent()).setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        new NewStudent(new ViewStudent()).setVisible(true);
+//    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;

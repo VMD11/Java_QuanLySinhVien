@@ -1,1 +1,1 @@
-Student{id=55, fullName=Nguyễn Văn X, birthday=05/05/2005, homeland=Vĩnh Phúc, gender=0, class_id=154333, GPA=3.0}
+Student{id=2022296148, fullName=1, birthday=01/01/2004, homeland=1, gender=0, class_id=127867, GPA=1.0}

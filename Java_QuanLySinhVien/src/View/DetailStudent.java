@@ -6,6 +6,7 @@ package View;
 
 import Common.*;
 import Component.ComboBox;
+import Component.Dialog;
 import Model.Student;
 import Service.*;
 import java.awt.event.ActionEvent;
@@ -609,6 +610,7 @@ public class DetailStudent extends javax.swing.JFrame {
     private void jBtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDeleteMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa sinh viên này", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if(result==JOptionPane.YES_OPTION){
+            Dialog.createDialog(1500, "Xin chờ...");
             studentService.delete(student);
             listener.onDataUpdate();
             dispose();
@@ -642,14 +644,16 @@ public class DetailStudent extends javax.swing.JFrame {
             String class_id = classService.getIDByName(jCbClass.getSelectedItem().toString());
         
             student = new Student(id, fullName, birthday, homeland, gender, class_id, GPA);
+            
+            Dialog.createDialog(1500, "Xin chờ...");
             studentService.update(student);
             listener.onDataUpdate();
         }
     }//GEN-LAST:event_jBtnUpdateMouseClicked
 
-    public static void main(String[] args) {
-        new DetailStudent(new ViewStudent()).setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        new DetailStudent(new ViewStudent()).setVisible(true);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnUpdate;

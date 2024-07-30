@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Component.Dialog;
 import Service.UserService;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -219,17 +220,18 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         }else{
             if(userService.checkUser(userName,password)){
-                JOptionPane.showMessageDialog(null, "Đănng nhập thành công");
+                Dialog.createDialog(3000, "Đang đăng nhập. Xin đợi...");
+                JOptionPane.showMessageDialog(null, "Đănng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE );
                 dispose();
                 new Index().setVisible(true);
             }else
-                JOptionPane.showMessageDialog(null, "Thông tin tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại");
+                JOptionPane.showMessageDialog(null, "Thông tin tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             userService.getUserList();
         }
     }//GEN-LAST:event_btnLoginMouseClicked
-    public static void main(String[] args) {
-        new Login().setVisible(true);
-    }
+    
+    
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

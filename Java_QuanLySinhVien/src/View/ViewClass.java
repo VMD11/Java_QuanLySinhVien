@@ -6,6 +6,7 @@ package View;
 
 import Common.CheckEmpty;
 import Component.ComboBox;
+import Component.Dialog;
 import Component.TableClass;
 import Model.Classes;
 import Service.*;
@@ -373,6 +374,7 @@ public class ViewClass extends javax.swing.JPanel {
             String name = jTName.getText();
             String majorName = jCbMajor.getSelectedItem().toString();
             String major_id = majorService.getIDByName(majorName);
+            Dialog.createDialog(1500, "Xin chờ...");
             classService.add(new Classes(name, major_id));
             jTName.setText(null);
             loadCB();
@@ -391,6 +393,7 @@ public class ViewClass extends javax.swing.JPanel {
             String name = jTName.getText();
             String majorName = jCbMajor.getSelectedItem().toString();
             String major_id = majorService.getIDByName(majorName);
+            Dialog.createDialog(1500, "Xin chờ...");
             classService.update(new Classes(id, name, major_id));
             loadTable();
         }
@@ -407,6 +410,7 @@ public class ViewClass extends javax.swing.JPanel {
             String major_id = majorService.getIDByName(majorName);
             int result = JOptionPane.showConfirmDialog(null, "Hành động này sẽ xóa tất cả các sinh viên thuộc lớp này. Bạn có chắc chắn muốn xóa không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
             if(result==JOptionPane.YES_OPTION){
+                Dialog.createDialog(1500, "Xin chờ...");
                 classService.delete(new Classes(id, name, major_id));
                 loadTable();
             }

@@ -5,6 +5,7 @@
 package View;
 
 import Common.CheckEmpty;
+import Component.Dialog;
 import Component.TableDepartment;
 import Model.Department;
 import Service.DepartmentService;
@@ -309,6 +310,7 @@ public class ViewDepartment extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không được để trống");
         else{
             String name = jTName.getText();
+            Dialog.createDialog(1500, "Xin chờ...");
             departmentService.add(new Department(name));
             jTName.setText(null);
             loadTable();
@@ -324,6 +326,7 @@ public class ViewDepartment extends javax.swing.JPanel {
         else{
             String id = jTBDepartment.getValueAt(selectedRow, 0).toString();
             String name = jTName.getText();
+            Dialog.createDialog(1500, "Xin chờ...");
             departmentService.update(new Department(id, name));
             loadTable();
         }
@@ -338,6 +341,7 @@ public class ViewDepartment extends javax.swing.JPanel {
             String name = jTName.getText();
             int result = JOptionPane.showConfirmDialog(null, "Hành động này sẽ xóa tất cả các sinh viên, các lớp, các ngành thuộc lớp này. Bạn có chắc chắn muốn xóa không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
             if(result==JOptionPane.YES_OPTION){
+                Dialog.createDialog(1500, "Xin chờ...");
                 departmentService.delete(new Department(id, name));
                 loadTable();
             }
