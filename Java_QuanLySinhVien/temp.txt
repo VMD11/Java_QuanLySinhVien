@@ -1,1 +1,1 @@
-Student{id=2022296148, fullName=1, birthday=01/01/2004, homeland=1, gender=0, class_id=127867, GPA=1.0}
+Student{id=z, fullName=zzzzzzzz, birthday=z, homeland=z, gender=0, class_id=170931, GPA=2.0}

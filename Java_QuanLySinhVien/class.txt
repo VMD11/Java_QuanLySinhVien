@@ -23,10 +23,8 @@ Class{id=164526, name=Kỹ thuật phầm mềm 3, major_id=187337}
 Class{id=142183, name=Quản trị kinh doanh 1, major_id=185090}
 Class{id=193917, name=Quản trị kinh doanh 2, major_id=185090}
 Class{id=104137, name=Quản trị kinh doanh 3, major_id=185090}
-Class{id=141089, name=test, major_id=173126}
 Class{id=196822, name=test lại, major_id=131551}
 Class{id=144884, name=Điện tử viễn thông 1, major_id=122942}
-
 Class{id=110766, name=test 3, major_id=171187}
 Class{id=170931, name=tests, major_id=117595}
 Class{id=154333, name=test tiếp, major_id=198998}
