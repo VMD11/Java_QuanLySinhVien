@@ -651,9 +651,6 @@ public class DetailStudent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnUpdateMouseClicked
 
-//    public static void main(String[] args) {
-//        new DetailStudent(new ViewStudent()).setVisible(true);
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnUpdate;

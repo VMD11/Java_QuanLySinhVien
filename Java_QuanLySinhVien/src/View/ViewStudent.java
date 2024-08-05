@@ -369,7 +369,8 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
 
     @Override
     public void onDataUpdate() {
-        loadTable();
+        tableStudent = new TableStudent(new StudentService());
+        jTStudent.setModel(tableStudent);
     }
 
     

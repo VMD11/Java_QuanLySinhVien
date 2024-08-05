@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -74,9 +75,13 @@ public class StudentService {
     }
     
     public void deleteByClass_id(String class_id){
-        for(Student item : studentList){
+        Iterator<Student> it = studentList.iterator();
+        while(it.hasNext()){
+            Student item = it.next();
             if(item.getClass_id().equalsIgnoreCase(class_id)){
-                studentList.remove(item);
+                System.out.println("class_id: " +class_id);
+                System.out.println(item.toString());
+                it.remove();
             }
         }
         addRangeToFile(filePath, studentList);

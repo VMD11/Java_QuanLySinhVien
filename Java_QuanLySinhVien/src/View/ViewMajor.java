@@ -5,6 +5,7 @@
 package View;
 
 import Common.CheckEmpty;
+import Common.ExportExcel;
 import Component.ComboBox;
 import Component.Dialog;
 import Component.TableMajor;
@@ -184,6 +185,11 @@ public class ViewMajor extends javax.swing.JPanel {
         jBtnExport.setText("Xuất Excel");
         jBtnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
+        jBtnExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnExportMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -388,6 +394,13 @@ public class ViewMajor extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jBtnDeleteMouseClicked
+
+    private void jBtnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExportMouseClicked
+        // TODO add your handling code here:
+        String filePath = "major_sheet.xlsx";
+        Dialog.createDialog(1500, "Xin chờ...");
+        ExportExcel.exportTable(jTBMajor, filePath);
+    }//GEN-LAST:event_jBtnExportMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

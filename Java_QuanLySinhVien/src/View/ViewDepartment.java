@@ -5,6 +5,7 @@
 package View;
 
 import Common.CheckEmpty;
+import Common.ExportExcel;
 import Component.Dialog;
 import Component.TableDepartment;
 import Model.Department;
@@ -170,6 +171,11 @@ public class ViewDepartment extends javax.swing.JPanel {
         jBtnExport.setText("Xuất Excel");
         jBtnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExport.setPreferredSize(new java.awt.Dimension(150, 40));
+        jBtnExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnExportMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -347,6 +353,13 @@ public class ViewDepartment extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jBtnDeleteMouseClicked
+
+    private void jBtnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExportMouseClicked
+        String filePath = "department_sheet.xlsx";
+        Dialog.createDialog(1500, "Xin chờ...");
+        ExportExcel.exportTable(jTBDepartment, filePath);
+        
+    }//GEN-LAST:event_jBtnExportMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
