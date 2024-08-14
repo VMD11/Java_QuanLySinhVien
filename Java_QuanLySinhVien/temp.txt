@@ -1,1 +1,1 @@
-Student{id=z, fullName=zzzzzzzz, birthday=z, homeland=z, gender=0, class_id=170931, GPA=2.0}
+Student{id=2023019092, fullName=Nguyễn Tú Tài, birthday=22/12/1999, homeland=Hà Nội, gender=0, class_id=144884, GPA=3.1}

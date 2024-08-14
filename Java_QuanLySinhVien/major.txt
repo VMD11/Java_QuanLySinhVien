@@ -9,5 +9,4 @@ Major{id=117595, name=test, department_id=173251}
 Major{id=198998, name=test 2, department_id=183187}
 Major{id=171187, name=test 3, department_id=165731}
 Major{id=122942, name=Công nghệ kỹ thuật điện tử - viễn thông, department_id=165731}
-
 Major{id=166252, name=Khoa học máy tính, department_id=129343}

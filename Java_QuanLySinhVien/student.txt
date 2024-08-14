@@ -18,7 +18,7 @@ Student{id=2020605565, fullName=Vũ Mạnh Dũng, birthday=11/12/2002, homeland=
 Student{id=Test, fullName=test, birthday=test, homeland=test, gender=0, class_id=154333, GPA=2.0}
 Student{id=2021023383, fullName=Đào Xuân Khánh, birthday=22/02/2003, homeland=Hà Nội, gender=0, class_id=164526, GPA=2.07}
 Student{id=2022579490, fullName=Ngô Sỹ Anh, birthday=10/12/2001, homeland=Nghệ An, gender=0, class_id=155082, GPA=4.0}
-Student{id=2023120071, fullName=x, birthday=12/02/2003, homeland=x, gender=0, class_id=null, GPA=2.5}
+Student{id=2023120071, fullName=x, birthday=12/02/2003, homeland=x, gender=0, class_id=127867, GPA=2.5}
 Student{id=2022296148, fullName=1, birthday=01/01/2004, homeland=1, gender=0, class_id=127867, GPA=1.99}
 Student{id=2021317801, fullName=test thêm lần nữa, birthday=02/02/2002, homeland=Hòa Bình, gender=1, class_id=170931, GPA=3.3}
-Student{id=2023019092, fullName=Nguyễn Tú Tài, birthday=22/12/1999, homeland=Hà Nội, gender=0, class_id=110766, GPA=3.3}
+Student{id=2023019092, fullName=Nguyễn Tú Tài, birthday=22/12/1999, homeland=Hà Nội, gender=0, class_id=144884, GPA=3.1}
