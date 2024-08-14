@@ -33,7 +33,7 @@ public class ViewMajor extends javax.swing.JPanel {
         initComponents();
         majorService = new MajorService();
         departmentService = new DepartmentService();
-        tableMajor = new TableMajor(new MajorService());
+//        tableMajor = new TableMajor(new MajorService());
         loadTable();
         loadCB();
         searchActionListener();
@@ -44,6 +44,7 @@ public class ViewMajor extends javax.swing.JPanel {
     }
 
     private void loadTable(){
+        tableMajor = new TableMajor(new MajorService());
         jTBMajor.setModel(tableMajor);
         jTBMajor.setRowHeight(20);
         jTBMajor.addMouseListener(new MouseListener() {
@@ -350,7 +351,7 @@ public class ViewMajor extends javax.swing.JPanel {
             String name = jTName.getText();
             String departmentName = jCBDepartment.getSelectedItem().toString();
             String department_id = departmentService.getIDByName(departmentName);
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin chờ...");
             majorService.add(new Major(name, department_id));
             jTName.setText(null);
             loadCB();
@@ -371,7 +372,7 @@ public class ViewMajor extends javax.swing.JPanel {
             String name = jTName.getText();
             String departmentName = jCBDepartment.getSelectedItem().toString();
             String department_id = departmentService.getIDByName(departmentName);
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin chờ...");
             majorService.update(new Major(id, name, department_id));
             loadTable();
         }
@@ -388,7 +389,7 @@ public class ViewMajor extends javax.swing.JPanel {
             String department_id = departmentService.getIDByName(departmentName);
             int result = JOptionPane.showConfirmDialog(null, "Hành động này sẽ xóa tất cả các sinh viên, các lớp thuộc ngành này. Bạn có chắc chắn muốn xóa không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
             if(result==JOptionPane.YES_OPTION){
-                Dialog.createDialog(1500, "Xin chờ...");
+                Dialog.createDialog(1000, "Xin chờ...");
                 majorService.delete(new Major(id, name, department_id));
                 loadTable();
             }
@@ -398,7 +399,7 @@ public class ViewMajor extends javax.swing.JPanel {
     private void jBtnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExportMouseClicked
         // TODO add your handling code here:
         String filePath = "major_sheet.xlsx";
-        Dialog.createDialog(1500, "Xin chờ...");
+        Dialog.createDialog(1000, "Xin chờ...");
         ExportExcel.exportTable(jTBMajor, filePath);
     }//GEN-LAST:event_jBtnExportMouseClicked
 

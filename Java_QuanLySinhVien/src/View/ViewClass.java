@@ -55,6 +55,7 @@ public class ViewClass extends javax.swing.JPanel {
     }
     
     private void loadTable(){
+        tableClass = new TableClass(new ClassesService());
         jTBClass.setModel(tableClass);
         jTBClass.setRowHeight(20);
         jTBClass.addMouseListener(new MouseListener() {
@@ -376,11 +377,13 @@ public class ViewClass extends javax.swing.JPanel {
     private void jBtnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAddMouseClicked
         if(CheckEmpty.isEmptyTextField(jTName))
             JOptionPane.showMessageDialog(null, "Không được để trống");
-        else{
+        else if(jCbMajor.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngành");
+        }else{
             String name = jTName.getText();
             String majorName = jCbMajor.getSelectedItem().toString();
             String major_id = majorService.getIDByName(majorName);
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin đợi...");
             classService.add(new Classes(name, major_id));
             jTName.setText(null);
             loadCB();
@@ -394,12 +397,14 @@ public class ViewClass extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn lớp để sửa");            
         else if(CheckEmpty.isEmptyTextField(jTName))
             JOptionPane.showMessageDialog(null, "Không được để trống");
-        else{
+        else if(jCbMajor.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngành");
+        }else {
             String id = jTBClass.getValueAt(selectedRow, 0).toString();
             String name = jTName.getText();
             String majorName = jCbMajor.getSelectedItem().toString();
             String major_id = majorService.getIDByName(majorName);
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin đợi...");
             classService.update(new Classes(id, name, major_id));
             loadTable();
         }
@@ -416,7 +421,7 @@ public class ViewClass extends javax.swing.JPanel {
             String major_id = majorService.getIDByName(majorName);
             int result = JOptionPane.showConfirmDialog(null, "Hành động này sẽ xóa tất cả các sinh viên thuộc lớp này. Bạn có chắc chắn muốn xóa không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
             if(result==JOptionPane.YES_OPTION){
-                Dialog.createDialog(1500, "Xin chờ...");
+                Dialog.createDialog(1000, "Xin đợi...");
                 classService.delete(new Classes(id, name, major_id));
                 loadTable();
             }
@@ -426,7 +431,7 @@ public class ViewClass extends javax.swing.JPanel {
     private void jBtnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExportMouseClicked
         // TODO add your handling code here:
         String filePath = "class_sheet.xlsx";
-        Dialog.createDialog(1500, "Xin chờ...");
+        Dialog.createDialog(1000, "Xin đợi...");
         ExportExcel.exportTable(jTBClass, filePath);
     }//GEN-LAST:event_jBtnExportMouseClicked
 

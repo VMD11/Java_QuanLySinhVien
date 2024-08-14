@@ -610,7 +610,7 @@ public class DetailStudent extends javax.swing.JFrame {
     private void jBtnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDeleteMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa sinh viên này", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if(result==JOptionPane.YES_OPTION){
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin chờ...");
             studentService.delete(student);
             listener.onDataUpdate();
             dispose();
@@ -645,7 +645,7 @@ public class DetailStudent extends javax.swing.JFrame {
         
             student = new Student(id, fullName, birthday, homeland, gender, class_id, GPA);
             
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin đợi...");
             studentService.update(student);
             listener.onDataUpdate();
         }

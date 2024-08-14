@@ -220,8 +220,8 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         }else{
             if(userService.checkUser(userName,password)){
-                Dialog.createDialog(2000, "Đang đăng nhập. Xin chờ...");
-                Dialog.createDialog(800, "Đăng nhập thành công");
+                Dialog.createDialog(1500, "Đang đăng nhập. Xin chờ...");
+                Dialog.createDialog(700, "Đăng nhập thành công");
                 dispose();
                 new Index().setVisible(true);
             }else

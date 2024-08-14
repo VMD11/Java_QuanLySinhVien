@@ -47,11 +47,9 @@ public class Index extends javax.swing.JFrame {
         jPLogout.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-//                AutomaticallyCloseMsBox(2000, "Đang đăng xuất.\nXin đợi...");
-//                new Login().setVisible(true);
                 int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đăng xuất", "Thông báo", JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
-                    Dialog.createDialog(2000, "Đang đăng xuất. Xin đợi...");
+                    Dialog.createDialog(1500, "Đang đăng xuất. Xin đợi...");
                     dispose();
                     new Login().setVisible(true);
                 }

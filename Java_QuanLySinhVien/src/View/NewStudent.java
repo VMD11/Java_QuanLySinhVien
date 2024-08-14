@@ -562,7 +562,7 @@ public class NewStudent extends javax.swing.JFrame {
             double GPA = Double.parseDouble(jTGPA.getText());
             String class_id = classService.getIDByName(jCbClass.getSelectedItem().toString());
             student = new Student(fullName, birthday, homeland, gender, class_id, GPA);
-            Dialog.createDialog(1500, "Xin chờ...");
+            Dialog.createDialog(1000, "Xin chờ...");
             if (studentService.add(student)) {
                 listener.onDataUpdate();
                 dispose();

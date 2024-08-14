@@ -21,7 +21,7 @@ public class TableStudent extends AbstractTableModel{
         private List<Student> studentList;
         private List<Student> students;
         public TableStudent(StudentService studentService){
-            students = studentService.getStudentList();
+            students = studentService.getList();
             studentList = new ArrayList<>(students);
         }
         
@@ -30,7 +30,7 @@ public class TableStudent extends AbstractTableModel{
                 studentList = new ArrayList<>(students);
             }else{
                 studentList = students.stream()
-                                      .filter(s -> s.getFullName().toUpperCase().contains(key.toUpperCase()))
+                                      .filter(s -> s.getFullName().toLowerCase().contains(key.toLowerCase()))
                                       .collect(Collectors.toList());
             }
             fireTableDataChanged();
@@ -41,7 +41,7 @@ public class TableStudent extends AbstractTableModel{
                 studentList = new ArrayList<>(students);
             }else{
                 studentList = students.stream()
-                                      .filter(s -> s.getClassName().contains(name))
+                                      .filter(s -> s.getClassName().equalsIgnoreCase(name))
                                       .collect(Collectors.toList());
             }
             fireTableDataChanged();

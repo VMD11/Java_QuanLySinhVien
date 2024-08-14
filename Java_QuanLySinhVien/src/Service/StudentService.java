@@ -127,9 +127,13 @@ public class StudentService {
     private void addRangeToFile(String filePath, List<Student> list){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            for(Student item : list){
-                writer.write(item.toString());
-                writer.newLine();
+            Iterator<Student> it = list.iterator();
+            while(it.hasNext()){
+                Student item = it.next();
+//                if(item != null){
+                    writer.write(item.toString());
+                    writer.newLine();
+//                }
             }
             writer.close();
         } catch (IOException ex) {

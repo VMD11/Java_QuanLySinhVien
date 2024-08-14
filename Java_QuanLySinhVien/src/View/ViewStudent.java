@@ -47,6 +47,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
     }
     
     private void loadTable(){
+        tableStudent = new TableStudent(new StudentService());
         jTStudent.setModel(tableStudent);
     }
     
@@ -72,6 +73,8 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
         jCbClass.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(jCbClass.getSelectedItem().toString());
+                
                 tableStudent.filter(jCbClass.getSelectedItem().toString());
             }
         });
@@ -150,7 +153,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
             @Override
             public void actionPerformed(ActionEvent e) {
                 String filePath = "student_sheet.xlsx";
-                Dialog.createDialog(1500, "Xin chờ...");
+                Dialog.createDialog(1000, "Xin chờ...");
                 ExportExcel.exportTable(jTStudent, filePath);
             }
         });
@@ -369,8 +372,7 @@ public class ViewStudent extends javax.swing.JPanel implements DataUpdateListene
 
     @Override
     public void onDataUpdate() {
-        tableStudent = new TableStudent(new StudentService());
-        jTStudent.setModel(tableStudent);
+       loadTable();
     }
 
     

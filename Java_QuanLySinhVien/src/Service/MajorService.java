@@ -152,8 +152,10 @@ public class MajorService {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for(Major item : list){
-                writer.write(item.toString());
-                writer.newLine();
+                if(item != null){
+                    writer.write(item.toString());
+                    writer.newLine();
+                }
             }
             writer.close();
         } catch (IOException ex) {

@@ -164,8 +164,10 @@ public class ClassesService {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for(Classes item : list){
-                writer.write(item.toString());
-                writer.newLine();
+                if(item != null){
+                    writer.write(item.toString());
+                    writer.newLine();
+                }
             }
             writer.close();
         } catch (IOException ex) {
