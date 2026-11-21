@@ -15,6 +15,7 @@ public class Classes implements Comparable<Classes>{
     private  String id;
     private String name;
     private String major_id;
+    private String age;
 
     public Classes() {
     }
